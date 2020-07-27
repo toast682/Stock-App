@@ -5,8 +5,8 @@
 ## The Practical aspects of Amogh's Super Stock App
 
 In the current day, where job loss seems to be a certainty for many people, rather than just a hypothetical situation;
-many people are looking for alternative forms of making ends meet. And this is where the stock market comes into play.
-With the situation caused by *COVID-19*, the markets are very disattached from the actual dire situation of the everyday
+many people are looking for alternative forms of making ends meet; and this is where the stock market comes into play.
+With the situation caused by *COVID-19*, the markets are very disjointed from the actual dire situation of the everyday
 economy. Stock trading has been up by an astounding **267%** year-over-year growth from the same time last year 
 (https://www.youtube.com/watch?v=KN5AqXmYn5E). As said earlier, this is caused by a few reasons:
 - Record amount of joblosses seen due to the collapse of the retail sector.
@@ -27,4 +27,20 @@ integrate into this app once the course has finished are API calls to track the 
 As a user, I want to be able to create the exact specifics of a stock as I please. I want to be able to input the 
 stock's name, code, the stock's purchase price, current price, and the day that the current price was recorded (so that 
 in the future I can see my gains and how long it took to get there), purchase date (to see the stock's maturity over a
-given time period), 
+given time period), the amount of stocks that I have, and to see the changes in the stocks price as a whole as the 
+stock matures. As such, a basic implementation of the stock trading app should be able to make all of that happen.
+
+- ### Second User Story
+As a user, I want to keep track of all of my stocks as a whole, rather than the app only being focused around one 
+specific stock, but rather a large variety of stocks as a whole. I want to be able to add of the stocks that I made and 
+combine them into a massive list that keeps track of all the stocks I have added.
+
+- ## Third User Story
+As a user, I want to be able to keep track of a specific stock that I have added to the list, and see all the 
+information associated with the stock. I want to be able to see all the stocks that I have added to the app, and if
+need be (could be due to a sale of a stock), get rid of the stock from my portfolio.
+
+- ##Fourth User Story
+As a user, I want my application to keep track of all the changes happening to a stock, and perhaps, even create a graph
+showing the growth of the stock as time associated. As such, I want the app to be able to keep track of all the changes
+I make to the price over a given period.
