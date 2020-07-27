@@ -5,6 +5,7 @@ package ui;
 import model.Stock;
 import model.StockList;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class StockApp {
@@ -143,7 +144,15 @@ public class StockApp {
         System.out.println("You have selected that you want to add a stock \n");
         setStockSymbol(newStock);
         setStockName(newStock);
-        setStockAmount(newStock);
+
+        try {
+            setStockAmount(newStock);
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter a valid Number");
+        } finally {
+            setStockAmount(newStock);
+        }
+
         purchasePrice = setStockPurchasePrice(newStock);
         purchaseDate = setStockPurchaseDate(newStock);
         addNewPriceHistory(newStock, purchasePrice, purchaseDate);

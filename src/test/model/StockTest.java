@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -48,9 +49,71 @@ class StockTest {
 
     @Test
     public void addNewPriceHistoryTest() {
-
+        stock.addNewPriceHistory("2020-02-01", 20);
+        assertEquals(stock.getPriceHistory().getStockPrice(), stock.getPriceHistory().getStockPrice());
     }
 
+    @Test
+    public void addTwoNewPriceHistoriesTest() {
+        stock.addNewPriceHistory("2020-02-01", 20);
+        assertEquals(stock.getPriceHistory().getStockPrice(), stock.getPriceHistory().getStockPrice());
+        stock.addNewPriceHistory("2013-02-06", 2020);
+        assertEquals(stock.getPriceHistory().getStockPrice(), stock.getPriceHistory().getStockPrice());
+    }
+
+    @Test
+    public void setNameTest() {
+        stock.setName("Booga");
+        assertEquals("booga", stock.getName());
+    }
+
+    @Test
+    public void setNameTwiceTest() {
+        stock.setName("Booga");
+        assertEquals("booga", stock.getName());
+        stock.setName("Googa");
+        assertEquals("googa", stock.getName());
+    }
+
+    @Test
+    public void setPurchasePriceTest() {
+        stock.setPurchasePrice(20);
+        assertEquals(20, stock.getPurchasePrice());
+    }
+    @Test
+    public void setPurchasePriceTwiceTest() {
+        stock.setPurchasePrice(20);
+        assertEquals(20, stock.getPurchasePrice());
+        stock.setPurchasePrice(152);
+        assertEquals(152, stock.getPurchasePrice());
+    }
+
+    @Test
+    public void setPurchaseDateTest() {
+        DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse("2020-02-01", formattedDate);
+
+        stock.setPurchaseDate("2020-02-01");
+        assertEquals(date, stock.getPurchaseDate());
+    }
+
+    @Test
+    public void setPurchaseDateTwiceTest() {
+        DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate firstDate = LocalDate.parse("2020-02-01", formattedDate);
+        LocalDate secondDate = LocalDate.parse("2021-02-06", formattedDate);
+
+        stock.setPurchaseDate("2020-02-01");
+        assertEquals(firstDate, stock.getPurchaseDate());
+        stock.setPurchaseDate("2021-02-06");
+        assertEquals(secondDate, stock.getPurchaseDate());
+    }
+
+    @Test
+    public void getPriceHistory() {
+        StockPriceList stockPriceList = stock.getPriceHistory();
+        assertEquals(stockPriceList, stock.getPriceHistory());
+    }
 
     @Test
     public void getStockSymbolTest() {

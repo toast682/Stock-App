@@ -63,9 +63,6 @@ public class Stock {
     public void setPurchaseDate(String purchaseDate) {
         DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.purchaseDate = LocalDate.parse(purchaseDate, formattedDate);
-
-
-        //System.out.println("Please enter a correct date in yyyy-MM-dd format \n");
     }
 
     //MODIFIES: this

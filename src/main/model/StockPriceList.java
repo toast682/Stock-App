@@ -16,6 +16,7 @@ public class StockPriceList {
         priceList.add(price);
     }
 
+    //REQUIRES: Price List not be empty
     //EFFECTS: Returns last added Stock Price
     public StockPrice getStockPrice() {
         return priceList.getLast();
