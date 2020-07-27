@@ -5,6 +5,9 @@ package model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+// Represents a stock with a ticker symbol, a purchase price, a name for the company to which the stock belongs to
+// a purchase date in the format yyyy-MM-dd, a price history consisting of StockPriceList, and the amount of stock
+// owned
 public class Stock {
 
     private String symbol;

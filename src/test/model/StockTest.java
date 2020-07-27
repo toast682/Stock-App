@@ -80,6 +80,7 @@ class StockTest {
         stock.setPurchasePrice(20);
         assertEquals(20, stock.getPurchasePrice());
     }
+
     @Test
     public void setPurchasePriceTwiceTest() {
         stock.setPurchasePrice(20);

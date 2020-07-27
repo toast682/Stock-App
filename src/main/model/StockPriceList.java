@@ -2,6 +2,7 @@ package model;
 
 import java.util.LinkedList;
 
+// Represents a list of Stock Prices
 public class StockPriceList {
 
     LinkedList<StockPrice> priceList;

@@ -3,6 +3,7 @@ package model;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+// Represents the date at which the given stock was at this price.
 public class StockPrice {
 
     private double price;
