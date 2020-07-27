@@ -21,3 +21,10 @@ trading tips has been something that my father, and I relinquish together. Watch
 scenario, tumble, is a collective experience that my father, and I relinquish in together, in all of this sadness or 
 glory. We have been having trouble tracking all the investments and their statistics. One of the aspects I intend to
 integrate into this app once the course has finished are API calls to track the stocks prices and their profits/losses.
+
+##User Stories
+- ###First User Story:
+As a user, I want to be able to create the exact specifics of a stock as I please. I want to be able to input the 
+stock's name, code, the stock's purchase price, current price, and the day that the current price was recorded (so that 
+in the future I can see my gains and how long it took to get there), purchase date (to see the stock's maturity over a
+given time period), 
