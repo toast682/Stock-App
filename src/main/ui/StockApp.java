@@ -243,6 +243,6 @@ public class StockApp {
         System.out.println("5. Change a stocks current price");
         System.out.println("6. Look at a stock's performance (NOT SUPPORTED AS OF RIGHT NOW)");
         System.out.println("7. Exit the app");
-        System.out.println("Please input a number associated with the options above");
+        System.out.println("Please input a number associated with the options above \n");
     }
 }
