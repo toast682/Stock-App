@@ -140,6 +140,7 @@ class StockTest {
         assertEquals(0, stock.getAmount());
     }
 
+
     private void SetAmountOnce(int i) {
         stock.setAmount(i);
         assertEquals(i, stock.getAmount());

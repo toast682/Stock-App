@@ -148,9 +148,6 @@ public class StockListTest {
         }
     }
 
-
-
-
     @Test
     public void checkOneFindTest() {
         Stock boom = new Stock();
@@ -203,7 +200,6 @@ public class StockListTest {
         assertEquals(fdg, stockList.findStock("fgd", 1000));
         assertEquals(gogs, stockList.findStock("gogs", 100));
         assertEquals(hoid, stockList.findStock("HOID", 100));
-
     }
 
 
@@ -244,5 +240,22 @@ public class StockListTest {
         }
     }
 
+    @Test
+    public void getFirstIndexTest() {
+        Stock stock = new Stock();
 
+        stockList.buyStock(stock);
+        assertEquals(stock, stockList.getIndex(0));
+    }
+
+    @Test
+    public void getSecondIndexTest() {
+        Stock stock1 = new Stock();
+        Stock stock2 = new Stock();
+
+        stockList.buyStock(stock1);
+        stockList.buyStock(stock2);
+        assertEquals(stock1, stockList.getIndex(0));
+        assertEquals(stock2, stockList.getIndex(1));
+    }
 }
