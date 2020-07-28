@@ -158,8 +158,6 @@ public class StockApp {
         setStockSymbol(newStock);
         setStockName(newStock);
         setStockAmount(newStock);
-        System.out.println("Please enter a valid Number");
-        setStockAmount(newStock);
         purchasePrice = setStockPurchasePrice(newStock);
         purchaseDate = setStockPurchaseDate(newStock);
         addNewPriceHistory(newStock, purchasePrice, purchaseDate);
