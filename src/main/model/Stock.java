@@ -1,4 +1,5 @@
-//https://stackoverflow.com/questions/42522744/taking-input-using-localdate
+//I used some help from this stack overflow thread
+// https://stackoverflow.com/questions/42522744/taking-input-using-localdate
 
 package model;
 
