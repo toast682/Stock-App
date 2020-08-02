@@ -27,7 +27,6 @@ public class StockPrice {
     public void setDate(String date) {
         DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.date = LocalDate.parse(date, formattedDate);
-
     }
 
     //EFFECTS: Returns the stockPrices's price

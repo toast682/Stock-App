@@ -22,7 +22,7 @@ scenario, tumble, is a collective experience that my father, and I relinquish in
 glory. We have been having trouble tracking all the investments and their statistics. One of the aspects I intend to
 integrate into this app once the course has finished are API calls to track the stocks prices and their profits/losses.
 
-##User Stories
+##User Stories Phase One
 - ###First User Story:
 As a user, I want to be able to create the exact specifics of a stock as I please. I want to be able to input the 
 stock's name, code, the stock's purchase price, current price, and the day that the current price was recorded (so that 
@@ -44,3 +44,15 @@ need be (could be due to a sale of a stock), get rid of the stock from my portfo
 As a user, I want my application to keep track of all the changes happening to a stock, and perhaps, even create a graph
 showing the growth of the stock as time associated. As such, I want the app to be able to keep track of all the changes
 I make to the price over a given period.
+
+
+##User Stories Phase Two
+- ###First User Story:
+As a user, I want to have the ability to choose my stock list. Rather than it being a requirement, If I feel that the 
+stock portfolio that I made is exactly how I wanted to be, I want to be able to save it. If I choose not to save the 
+wishlist, then I also want the ability to not do so. The choice that the app provides to me is of utmost priority.
+
+- ###Second User Story:
+As a user, I want the ability to load my stock portfolio that I have made earlier. As an additional feature, I want to 
+be able to choose between previously saved portfolios, such that multiple people can use my app without have multiple 
+instances of the app open. This will allow greater flexibility when it comes to being able to use the app.
