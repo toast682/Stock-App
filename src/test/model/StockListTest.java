@@ -1,11 +1,10 @@
 package model;
 
+import exceptions.MassiveStockFindError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StockListTest {
 
@@ -152,9 +151,13 @@ public class StockListTest {
     void checkOneFindTest() {
         Stock boom = new Stock();
 
-        stockList.buyStock(boom);
-        assertTrue(stockList.contains("DEF", 0));
-        assertEquals(boom, stockList.findStock("DEF", 0));
+        try {
+            stockList.buyStock(boom);
+            assertTrue(stockList.contains("DEF", 0));
+            assertEquals(boom, stockList.findStock("DEF", 0));
+        } catch (MassiveStockFindError e) {
+            fail("Should not have occurred");
+        }
     }
 
     @Test
@@ -165,11 +168,15 @@ public class StockListTest {
         look.setAmount(100);
         look.setSymbol("GERF");
 
-        stockList.buyStock(boom);
-        stockList.buyStock(look);
-        assertFalse(stockList.contains("DEF", 100));
-        assertEquals(look, stockList.findStock("GERF", 100));
-        assertEquals(boom, stockList.findStock("DEF", 0));
+        try {
+            stockList.buyStock(boom);
+            stockList.buyStock(look);
+            assertFalse(stockList.contains("DEF", 100));
+            assertEquals(look, stockList.findStock("GERF", 100));
+            assertEquals(boom, stockList.findStock("DEF", 0));
+        } catch (MassiveStockFindError e) {
+            fail("Should not have occurred");
+        }
     }
 
     @Test
@@ -189,17 +196,21 @@ public class StockListTest {
         hoid.setAmount(100);
         hoid.setSymbol("hoid");
 
-        stockList.buyStock(boom);
-        stockList.buyStock(look);
-        stockList.buyStock(fdg);
-        stockList.buyStock(gogs);
-        stockList.buyStock(hoid);
-        assertFalse(stockList.contains("DEF", 100));
-        assertEquals(boom, stockList.findStock("def", 0));
-        assertEquals(look, stockList.findStock("GERF", 100));
-        assertEquals(fdg, stockList.findStock("fgd", 1000));
-        assertEquals(gogs, stockList.findStock("gogs", 100));
-        assertEquals(hoid, stockList.findStock("HOID", 100));
+        try {
+            stockList.buyStock(boom);
+            stockList.buyStock(look);
+            stockList.buyStock(fdg);
+            stockList.buyStock(gogs);
+            stockList.buyStock(hoid);
+            assertFalse(stockList.contains("DEF", 100));
+            assertEquals(boom, stockList.findStock("def", 0));
+            assertEquals(look, stockList.findStock("GERF", 100));
+            assertEquals(fdg, stockList.findStock("fgd", 1000));
+            assertEquals(gogs, stockList.findStock("gogs", 100));
+            assertEquals(hoid, stockList.findStock("HOID", 100));
+        } catch (MassiveStockFindError e) {
+            fail("Should not have occurred");
+        }
     }
 
 

@@ -2,10 +2,14 @@
 
 package ui;
 
+import exceptions.MassiveStockFindError;
 import model.Stock;
 import model.StockList;
 import persistence.SaveAndLoad;
 
+import java.io.IOException;
+import java.time.format.DateTimeParseException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Represents the UI interface through which the user will interact with
@@ -26,17 +30,21 @@ public class StockApp {
         mainInput = new Scanner(System.in);
         stockPortfolio = null;
 
-        System.out.println("Hey, welcome to the Stock Traders Delight!");
-        System.out.println("Before we get started, would ypu like to load a existing portfolio?");
-        System.out.println("Type \"y\" for yes, \"n\" for no");
-        stockPortfolio = chooseSelection();
-        System.out.println("Welcome to the app !");
-        System.out.println("What would you like to do?");
+        startSequence();
 
         while (true) {
             showOptions();
-            int input = mainInput.nextInt();
-            if (input == 8) {
+            int input;
+            try {
+                input = mainInput.nextInt();
+                mainInput.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter an integer!");
+                mainInput.nextLine();
+                input = mainInput.nextInt();
+            }
+            if (input == 6) {
+                quitSequence();
                 System.out.println("Thanks for using Amogh's Super Stock App! Hope to see you soon!");
                 break;
             } else {
@@ -45,11 +53,21 @@ public class StockApp {
         }
     }
 
+    //MODIFIES: youStocks
+    //EFFECTS: If user wants to load in a portfolio, this does it, otherwise, creates a new portfolio
     private StockList chooseSelection() {
         while (true) {
             String input = mainInput.next();
             if (input.equals("y")) {
-                return data.loadData();
+                try {
+                    return data.loadData();
+                } catch (IOException e) {
+                    System.out.println("There was an error loading your data");
+                } catch (ClassNotFoundException e) {
+                    System.out.println("Sorry your previous portfolio does not seem to be found. Creating a new "
+                            + "portfolio");
+                    return new StockList();
+                }
             } else if (input.equals("n")) {
                 return new StockList();
             } else {
@@ -77,13 +95,19 @@ public class StockApp {
             case 5:
                 changeCurrentStockPrice();
                 break;
-            case 6:
-                data.saveData(stockPortfolio);
-                break;
             default:
                 System.out.println("Invalid selection. Please choose one of the given options");
                 break;
         }
+    }
+
+    private void startSequence() {
+        System.out.println("Hey, welcome to the Stock Traders Delight!");
+        System.out.println("Before we get started, would ypu like to load a existing portfolio?");
+        System.out.println("Type \"y\" to load an existing portfolio, or \"n\" for to continue with a new portfolio:");
+        stockPortfolio = chooseSelection();
+        System.out.println("Welcome to the app !");
+        System.out.println("What would you like to do?");
     }
 
 
@@ -118,8 +142,12 @@ public class StockApp {
                 + "find");
         amount = mainInput.nextInt();
         if (stockPortfolio.contains(symbol, amount)) {
-            stock = stockPortfolio.findStock(symbol, amount);
-            stockInfo(stock);
+            try {
+                stock = stockPortfolio.findStock(symbol, amount);
+                stockInfo(stock);
+            } catch (MassiveStockFindError e) {
+                System.out.println("There has been a massive error.");
+            }
         } else {
             System.out.println("Sorry this stock has not been added. Make sure all the information given is correct");
         }
@@ -128,26 +156,33 @@ public class StockApp {
     //EFFECTS: Removes a stock from the Stocklist if it exists, otherwise does nothing
     private void processSale(String symbol, int amount) {
         Stock stock;
+        try {
+            if (stockPortfolio.contains(symbol, amount)) {
+                System.out.println("Here is the information related to your stock");
+                stock = stockPortfolio.findStock(symbol, amount);
+                stockInfo(stock);
 
-        if (stockPortfolio.contains(symbol, amount)) {
-            String deleteInput;
-
-            System.out.println("Here is the information related to your stock");
-            stock = stockPortfolio.findStock(symbol, amount);
-            stockInfo(stock);
-            System.out.println("Are you sure you want to delete the stock?");
-            System.out.println("Type \"Yes\" or \"No\"");
-            deleteInput = mainInput.next();
-            if (deleteInput.equals("Yes")) {
-                System.out.println("Deleting the Stock");
-                stockPortfolio.sellStock(symbol, amount);
-            } else if (deleteInput.equals("No")) {
-                System.out.println("Cancelling");
+                deleteStock(symbol, amount);
             } else {
-                System.out.println("Invalid Input");
+                System.out.println("Sorry this stock does not exist. Make sure all the given information is correct");
             }
+        } catch (MassiveStockFindError e) {
+            System.out.println("There was a massive Error");
+        }
+    }
+
+    private void deleteStock(String symbol, int amount) {
+        String deleteInput;
+        System.out.println("Are you sure you want to delete the stock?");
+        System.out.println("Type \"y\" for yes or \"n\" for no");
+        deleteInput = mainInput.next();
+        if (deleteInput.equals("y")) {
+            System.out.println("Deleting the Stock");
+            stockPortfolio.sellStock(symbol, amount);
+        } else if (deleteInput.equals("n")) {
+            System.out.println("Cancelling");
         } else {
-            System.out.println("Sorry this stock does not exist. Make sure all the given information is correct");
+            System.out.println("Invalid Input");
         }
     }
 
@@ -184,8 +219,8 @@ public class StockApp {
         System.out.println(s);
         System.out.println("These are the stocks you currently have: \n");
         for (int i = 0; i <= stockPortfolio.length() - 1; i++) {
-            Stock stocki = stockPortfolio.getIndex(i);
-            stockInfo(stocki);
+            Stock stockI = stockPortfolio.getIndex(i);
+            stockInfo(stockI);
         }
 
     }
@@ -208,19 +243,50 @@ public class StockApp {
         Stock stock;
         double price;
         String date;
+        try {
+            showAllStock("These are the current Stocks that you have");
+            System.out.println("Please input the symbol of which stock you want to change the price of:");
+            symbol = mainInput.next().toUpperCase().trim();
+            System.out.println("Please enter the amount of stocks which you own of the stock which you are changing "
+                    + "the current price");
+            amount = mainInput.nextInt();
+            stock = stockPortfolio.findStock(symbol, amount);
+            System.out.println("Please enter the current price of the Stock:");
+            price = mainInput.nextDouble();
+            System.out.println("Please enter the date of the price is correct in the yyyy-MM-dd format with "
+                    + "the dashes");
+            date = mainInput.next();
+            addNewPriceHistory(stock, price, date);
+        } catch (MassiveStockFindError e) {
+            System.out.println("There has been a massive error");
+        }
+    }
 
-        showAllStock("These are the current Stocks that you have");
-        System.out.println("Please input the symbol of which stock you want to change the price of:");
-        symbol = mainInput.next().toUpperCase().trim();
-        System.out.println("Please enter the amount of stocks which you own of the stock which you are changing the "
-                + "current price");
-        amount = mainInput.nextInt();
-        stock = stockPortfolio.findStock(symbol, amount);
-        System.out.println("Please enter the current price of the Stock:");
-        price = mainInput.nextDouble();
-        System.out.println("Please enter the date of the price is correct in the yyyy-MM-dd format with the dashes");
-        date = mainInput.next();
-        addNewPriceHistory(stock, price, date);
+    //MODIFIES: "./data/account/ser"
+    //EFFECTS: If user wants to save portfolio then saves portfolio, otherwise does not save portfolio
+    private void quitSequence() {
+        String option;
+
+        System.out.println("Before you quit, would you like to save your stock?");
+        System.out.println("Type \"y\" for yes, or \"n\" for no");
+        option = mainInput.next();
+        while (true) {
+            if (option.equals("y")) {
+                System.out.println("Saving your data!");
+                try {
+                    data.saveData(stockPortfolio);
+                    break;
+                } catch (IOException e) {
+                    System.out.println("There was an error saving your data.");
+                    e.printStackTrace();
+                }
+            } else if (option.equals("n")) {
+                System.out.println("Did not save data");
+                break;
+            } else {
+                System.out.println("Invalid selection");
+            }
+        }
     }
 
 
@@ -236,10 +302,20 @@ public class StockApp {
     //EFFECTS: Changes a Stocks purchase date and returns the new purchase date
     private String setStockPurchaseDate(Stock newStock) {
         String purchaseDate;
-        System.out.println("When did you buy the stock? Please enter the date in the format yyyy-MM-dd with the "
-                + "dashes");
-        purchaseDate = mainInput.next();
-        newStock.setPurchaseDate(purchaseDate);
+
+        try {
+            System.out.println("When did you buy the stock? Please enter the date in the format yyyy-MM-dd with the "
+                    + "dashes");
+
+            purchaseDate = mainInput.next();
+            newStock.setPurchaseDate(purchaseDate);
+        } catch (DateTimeParseException e) {
+            System.out.println("Please input date in the valid format yyyy-MM-dd!!");
+            mainInput.nextLine();
+            purchaseDate = mainInput.next();
+
+            newStock.setPurchaseDate(purchaseDate);
+        }
         return purchaseDate;
     }
 
@@ -247,8 +323,16 @@ public class StockApp {
     //EFFECTS: Changes a Stocks purchase price and returns the new purchase price
     private double setStockPurchasePrice(Stock newStock) {
         double purchasePrice;
-        System.out.println("What was the purchase price for the stock?");
-        purchasePrice = mainInput.nextDouble();
+
+        try {
+            System.out.println("What was the purchase price for the stock?");
+            purchasePrice = mainInput.nextDouble();
+            mainInput.nextLine();
+        } catch (InputMismatchException e) {
+            System.out.println("Please enter a valid real number!");
+            mainInput.nextLine();
+            purchasePrice = mainInput.nextDouble();
+        }
         newStock.setPurchasePrice(purchasePrice);
         return purchasePrice;
     }
@@ -257,8 +341,16 @@ public class StockApp {
     //EFFECTS: Changes the amount of stocks
     private void setStockAmount(Stock newStock) {
         int amount;
-        System.out.println("How many stocks did you buy?");
-        amount = mainInput.nextInt();
+
+        try {
+            System.out.println("How many stocks did you buy?");
+            amount = mainInput.nextInt();
+            mainInput.nextLine();
+        } catch (InputMismatchException e) {
+            mainInput.nextLine();
+            System.out.println("Please Input a valid Integer!");
+            amount = mainInput.nextInt();
+        }
         newStock.setAmount(amount);
     }
 
@@ -266,6 +358,7 @@ public class StockApp {
     //EFFECTS: Changes the name of the stock
     private void setStockName(Stock newStock) {
         String name;
+
         System.out.println("What is the name of the stock?");
         name = mainInput.next();
         newStock.setName(name);
@@ -288,9 +381,9 @@ public class StockApp {
         System.out.println("3. Find a stock from your portfolio");
         System.out.println("4. Look at all of your existing stocks");
         System.out.println("5. Change a stocks current price");
-        System.out.println("6. Look at a stock's performance (NOT SUPPORTED AS OF RIGHT NOW)");
-        System.out.println("7. Save your stock portfolio");
-        System.out.println("8. Exit the app");
+//      System.out.println("6. Look at a stock's performance (NOT SUPPORTED AS OF RIGHT NOW)");
+//      System.out.println("6. Save your stock portfolio");
+        System.out.println("6. Exit the app");
         System.out.println("Please input a number associated with the options above \n");
     }
 }
