@@ -36,7 +36,9 @@ public class StockList implements Serializable {
 
 
     //REQUIRES: Stock has already been added to StockList
-    //EFFECTS: Finds all the information about the given stock, if not found, does nothing
+    //EFFECTS: Finds all the information about the given stock. However, this method is always called on a list
+    //         containing the stock, thus it will always return a stock. In teh even that it does not, it will throw an
+    //         error.
     public Stock findStock(String symbol, int amount) throws MassiveStockFindError {
         symbol = symbol.toUpperCase().trim();
         for (Stock stock : list) {

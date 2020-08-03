@@ -252,6 +252,16 @@ public class StockListTest {
     }
 
     @Test
+    void exceptionTest() {
+        try{
+            stockList.findStock("HH", 212 );
+            fail("Should not have happened");
+        } catch (MassiveStockFindError e){
+
+        }
+    }
+
+    @Test
     void getFirstIndexTest() {
         Stock stock = new Stock();
 
@@ -268,5 +278,10 @@ public class StockListTest {
         stockList.buyStock(stock2);
         assertEquals(stock1, stockList.getIndex(0));
         assertEquals(stock2, stockList.getIndex(1));
+    }
+
+    @Test
+    void sellStockWhenNoStockExistsTest() {
+        stockList.sellStock("HH", 200);
     }
 }
