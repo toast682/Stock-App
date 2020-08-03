@@ -4,15 +4,16 @@ package ui;
 
 import model.Stock;
 import model.StockList;
+import persistence.SaveAndLoad;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 // Represents the UI interface through which the user will interact with
 public class StockApp {
 
     private Scanner mainInput;
-    private StockList yourStocks;
+    private StockList stockPortfolio;
+    private SaveAndLoad data;
 
     //EFFECTS: Constructor calls other method and starts ui
     public StockApp() {
@@ -23,22 +24,36 @@ public class StockApp {
     //EFFECTS: Starts the startup sequence for the app, ends when user exits
     public void startStockApp() {
         mainInput = new Scanner(System.in);
-        yourStocks = new StockList();
+        stockPortfolio = null;
 
         System.out.println("Hey, welcome to the Stock Traders Delight!");
-        System.out.println("Before we get started, what is you name?");
-        String name = mainInput.next();
-        System.out.println("Welcome to the app " + name + "!");
+        System.out.println("Before we get started, would ypu like to load a existing portfolio?");
+        System.out.println("Type \"y\" for yes, \"n\" for no");
+        stockPortfolio = chooseSelection();
+        System.out.println("Welcome to the app !");
         System.out.println("What would you like to do?");
 
         while (true) {
             showOptions();
             int input = mainInput.nextInt();
-            if (input == 7) {
+            if (input == 8) {
                 System.out.println("Thanks for using Amogh's Super Stock App! Hope to see you soon!");
                 break;
             } else {
                 processSelection(input);
+            }
+        }
+    }
+
+    private StockList chooseSelection() {
+        while (true) {
+            String input = mainInput.next();
+            if (input.equals("y")) {
+                return data.loadData();
+            } else if (input.equals("n")) {
+                return new StockList();
+            } else {
+                System.out.println("invalid input");
             }
         }
     }
@@ -50,7 +65,6 @@ public class StockApp {
             case 1:
                 buyStock();
                 break;
-
             case 2:
                 sellStock();
                 break;
@@ -64,13 +78,14 @@ public class StockApp {
                 changeCurrentStockPrice();
                 break;
             case 6:
-                System.out.println("This feature is not yet supported, so stay tuned for an update!");
+                data.saveData(stockPortfolio);
                 break;
             default:
                 System.out.println("Invalid selection. Please choose one of the given options");
                 break;
         }
     }
+
 
     // MODIFIES: StockList
     // EFFECTS: Removes a stock form StockList
@@ -102,8 +117,8 @@ public class StockApp {
                 + "multiple times, then input the amount of stocks related to the instance of the stock you want to "
                 + "find");
         amount = mainInput.nextInt();
-        if (yourStocks.contains(symbol, amount)) {
-            stock = yourStocks.findStock(symbol, amount);
+        if (stockPortfolio.contains(symbol, amount)) {
+            stock = stockPortfolio.findStock(symbol, amount);
             stockInfo(stock);
         } else {
             System.out.println("Sorry this stock has not been added. Make sure all the information given is correct");
@@ -114,18 +129,18 @@ public class StockApp {
     private void processSale(String symbol, int amount) {
         Stock stock;
 
-        if (yourStocks.contains(symbol, amount)) {
+        if (stockPortfolio.contains(symbol, amount)) {
             String deleteInput;
 
             System.out.println("Here is the information related to your stock");
-            stock = yourStocks.findStock(symbol, amount);
+            stock = stockPortfolio.findStock(symbol, amount);
             stockInfo(stock);
             System.out.println("Are you sure you want to delete the stock?");
             System.out.println("Type \"Yes\" or \"No\"");
             deleteInput = mainInput.next();
             if (deleteInput.equals("Yes")) {
                 System.out.println("Deleting the Stock");
-                yourStocks.sellStock(symbol, amount);
+                stockPortfolio.sellStock(symbol, amount);
             } else if (deleteInput.equals("No")) {
                 System.out.println("Cancelling");
             } else {
@@ -161,15 +176,15 @@ public class StockApp {
         purchasePrice = setStockPurchasePrice(newStock);
         purchaseDate = setStockPurchaseDate(newStock);
         addNewPriceHistory(newStock, purchasePrice, purchaseDate);
-        yourStocks.buyStock(newStock);
+        stockPortfolio.buyStock(newStock);
     }
 
     //EFFECTS: Shows all the stocks in the stock list
     private void showAllStock(String s) {
         System.out.println(s);
         System.out.println("These are the stocks you currently have: \n");
-        for (int i = 0; i <= yourStocks.length() - 1; i++) {
-            Stock stocki = yourStocks.getIndex(i);
+        for (int i = 0; i <= stockPortfolio.length() - 1; i++) {
+            Stock stocki = stockPortfolio.getIndex(i);
             stockInfo(stocki);
         }
 
@@ -200,7 +215,7 @@ public class StockApp {
         System.out.println("Please enter the amount of stocks which you own of the stock which you are changing the "
                 + "current price");
         amount = mainInput.nextInt();
-        stock = yourStocks.findStock(symbol, amount);
+        stock = stockPortfolio.findStock(symbol, amount);
         System.out.println("Please enter the current price of the Stock:");
         price = mainInput.nextDouble();
         System.out.println("Please enter the date of the price is correct in the yyyy-MM-dd format with the dashes");
@@ -274,7 +289,8 @@ public class StockApp {
         System.out.println("4. Look at all of your existing stocks");
         System.out.println("5. Change a stocks current price");
         System.out.println("6. Look at a stock's performance (NOT SUPPORTED AS OF RIGHT NOW)");
-        System.out.println("7. Exit the app");
+        System.out.println("7. Save your stock portfolio");
+        System.out.println("8. Exit the app");
         System.out.println("Please input a number associated with the options above \n");
     }
 }

@@ -14,25 +14,25 @@ class StockPriceTest {
     StockPrice price;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         price = new StockPrice();
     }
 
     @Test
-    public void setPriceOnceTest() {
+    void setPriceOnceTest() {
         assertEquals(0, price.getPrice());
         setPriceToGiven(1949.26);
     }
 
     @Test
-    public void setPriceTwiceTest() {
+    void setPriceTwiceTest() {
         assertEquals(0, price.getPrice());
         setPriceToGiven(7987.123);
         setPriceToGiven(45645.46);
     }
 
     @Test
-    public void setDateOnceTest() {
+    void setDateOnceTest() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate newDate = LocalDate.parse("2002-12-30", format);
 
@@ -42,7 +42,7 @@ class StockPriceTest {
     }
 
     @Test
-    public void setDateTwiceTest() {
+    void setDateTwiceTest() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate firstDate = LocalDate.parse("2002-12-30", format);
         LocalDate secondDate = LocalDate.parse("2020-02-20");

@@ -3,13 +3,14 @@
 
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 // Represents a stock with a ticker symbol, a purchase price, a name for the company to which the stock belongs to
 // a purchase date in the format yyyy-MM-dd, a price history consisting of StockPriceList, and the amount of stock
 // owned
-public class Stock {
+public class Stock implements Serializable {
 
     private String symbol;
     private double purchasePrice;
@@ -104,5 +105,4 @@ public class Stock {
     public LocalDate getPurchaseDate() {
         return this.purchaseDate;
     }
-
 }

@@ -12,12 +12,12 @@ public class StockListTest {
     StockList stockList;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         stockList = new StockList();
     }
 
     @Test
-    public void buyOneStockTest() {
+    void buyOneStockTest() {
         Stock boom = new Stock();
 
         stockList.buyStock(boom);
@@ -26,7 +26,7 @@ public class StockListTest {
     }
 
     @Test
-    public void buyTwoStocksTest() {
+    void buyTwoStocksTest() {
         Stock boom = new Stock();
         Stock doom = new Stock();
         doom.setSymbol("GOG");
@@ -41,7 +41,7 @@ public class StockListTest {
     }
 
     @Test
-    public void buyLargeAmountOfStocksTest() {
+    void buyLargeAmountOfStocksTest() {
         for (int i = 0; i <= 5000; i++) {
             Stock boom = new Stock();
             boom.setSymbol(Integer.toString(i));
@@ -53,7 +53,7 @@ public class StockListTest {
     }
 
     @Test
-    public void sellOneStockTest() {
+    void sellOneStockTest() {
         Stock Boom = new Stock();
 
         stockList.buyStock(Boom);
@@ -65,7 +65,7 @@ public class StockListTest {
     }
 
     @Test
-    public void sellTwoStocksTest() {
+    void sellTwoStocksTest() {
         Stock boom = new Stock();
         Stock doom = new Stock();
         doom.setSymbol("GOG");
@@ -86,7 +86,7 @@ public class StockListTest {
     }
 
     @Test
-    public void sellLargeAmountOfStocksTest() {
+    void sellLargeAmountOfStocksTest() {
         for (int i = 0; i <= 5000; i++) {
             Stock boom = new Stock();
             boom.setAmount(i);
@@ -102,12 +102,12 @@ public class StockListTest {
     }
 
     @Test
-    public void checkNoneContainsFalseTest() {
+    void checkNoneContainsFalseTest() {
         assertFalse(stockList.contains("None", 12));
     }
 
     @Test
-    public void checkOneContainsFalseTest() {
+    void checkOneContainsFalseTest() {
         Stock boom = new Stock();
 
         stockList.buyStock(boom);
@@ -115,7 +115,7 @@ public class StockListTest {
     }
 
     @Test
-    public void checkOneContainsTrueTest() {
+    void checkOneContainsTrueTest() {
         Stock boom = new Stock();
 
         stockList.buyStock(boom);
@@ -123,7 +123,7 @@ public class StockListTest {
     }
 
     @Test
-    public void checkOneContainsTrueWrongTest() {
+    void checkOneContainsTrueWrongTest() {
         Stock boom = new Stock();
 
         stockList.buyStock(boom);
@@ -131,7 +131,7 @@ public class StockListTest {
     }
 
     @Test
-    public void checkLargeContainsTrueAndFalseTest() {
+    void checkLargeContainsTrueAndFalseTest() {
 
         for (int i = 0; i <= 5000; i++) {
             Stock boom = new Stock();
@@ -149,7 +149,7 @@ public class StockListTest {
     }
 
     @Test
-    public void checkOneFindTest() {
+    void checkOneFindTest() {
         Stock boom = new Stock();
 
         stockList.buyStock(boom);
@@ -158,7 +158,7 @@ public class StockListTest {
     }
 
     @Test
-    public void checkTwoFindTest() {
+    void checkTwoFindTest() {
         Stock boom = new Stock();
         Stock look = new Stock();
 
@@ -173,7 +173,7 @@ public class StockListTest {
     }
 
     @Test
-    public void checkLargerFindTest() {
+    void checkLargerFindTest() {
         Stock boom = new Stock();
         Stock look = new Stock();
         Stock fdg = new Stock();
@@ -204,7 +204,7 @@ public class StockListTest {
 
 
     @Test
-    public void checkLengthWithOneTest() {
+    void checkLengthWithOneTest() {
         Stock boom = new Stock();
 
         stockList.buyStock(boom);
@@ -212,7 +212,7 @@ public class StockListTest {
     }
 
     @Test
-    public void checkLengthWithTwoTest() {
+    void checkLengthWithTwoTest() {
         Stock boom = new Stock();
         Stock look = new Stock();
 
@@ -227,7 +227,7 @@ public class StockListTest {
     }
 
     @Test
-    public void checkLengthWithLargeAmountTest() {
+    void checkLengthWithLargeAmountTest() {
         for (int i = 0; i <= 5000; i++) {
             Stock boom = new Stock();
 
@@ -241,7 +241,7 @@ public class StockListTest {
     }
 
     @Test
-    public void getFirstIndexTest() {
+    void getFirstIndexTest() {
         Stock stock = new Stock();
 
         stockList.buyStock(stock);
@@ -249,7 +249,7 @@ public class StockListTest {
     }
 
     @Test
-    public void getSecondIndexTest() {
+    void getSecondIndexTest() {
         Stock stock1 = new Stock();
         Stock stock2 = new Stock();
 

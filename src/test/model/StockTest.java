@@ -13,7 +13,7 @@ class StockTest {
     Stock stock;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         stock = new Stock();
     }
 
@@ -23,24 +23,20 @@ class StockTest {
     }
 
     @Test
-    public void setStockAmountTwiceTest() {
+    void setStockAmountTwiceTest() {
         SetAmountOnce(1000);
         SetAmountOnce(212);
     }
 
     @Test
-    public void setSymbolOnceTest() {
+    void setSymbolOnceTest() {
         assertEquals("DEF", stock.getSymbol());
         setSymbolOnce("WEET");
     }
 
-    private void setSymbolOnce(String weet) {
-        stock.setSymbol(weet);
-        assertEquals(weet, stock.getSymbol());
-    }
 
     @Test
-    public void setStockThriceTest() {
+    void setStockThriceTest() {
         assertEquals("DEF", stock.getSymbol());
         setSymbolOnce("GOOG");
         setSymbolOnce("AAPL");
@@ -48,13 +44,13 @@ class StockTest {
     }
 
     @Test
-    public void addNewPriceHistoryTest() {
+    void addNewPriceHistoryTest() {
         stock.addNewPriceHistory("2020-02-01", 20);
         assertEquals(stock.getPriceHistory().getStockPrice(), stock.getPriceHistory().getStockPrice());
     }
 
     @Test
-    public void addTwoNewPriceHistoriesTest() {
+    void addTwoNewPriceHistoriesTest() {
         stock.addNewPriceHistory("2020-02-01", 20);
         assertEquals(stock.getPriceHistory().getStockPrice(), stock.getPriceHistory().getStockPrice());
         stock.addNewPriceHistory("2013-02-06", 2020);
@@ -62,13 +58,13 @@ class StockTest {
     }
 
     @Test
-    public void setNameTest() {
+    void setNameTest() {
         stock.setName("Booga");
         assertEquals("booga", stock.getName());
     }
 
     @Test
-    public void setNameTwiceTest() {
+    void setNameTwiceTest() {
         stock.setName("Booga");
         assertEquals("booga", stock.getName());
         stock.setName("Googa");
@@ -76,13 +72,13 @@ class StockTest {
     }
 
     @Test
-    public void setPurchasePriceTest() {
+    void setPurchasePriceTest() {
         stock.setPurchasePrice(20);
         assertEquals(20, stock.getPurchasePrice());
     }
 
     @Test
-    public void setPurchasePriceTwiceTest() {
+    void setPurchasePriceTwiceTest() {
         stock.setPurchasePrice(20);
         assertEquals(20, stock.getPurchasePrice());
         stock.setPurchasePrice(152);
@@ -90,7 +86,7 @@ class StockTest {
     }
 
     @Test
-    public void setPurchaseDateTest() {
+    void setPurchaseDateTest() {
         DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse("2020-02-01", formattedDate);
 
@@ -99,7 +95,7 @@ class StockTest {
     }
 
     @Test
-    public void setPurchaseDateTwiceTest() {
+    void setPurchaseDateTwiceTest() {
         DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate firstDate = LocalDate.parse("2020-02-01", formattedDate);
         LocalDate secondDate = LocalDate.parse("2021-02-06", formattedDate);
@@ -111,36 +107,40 @@ class StockTest {
     }
 
     @Test
-    public void getPriceHistory() {
+    void getPriceHistory() {
         StockPriceList stockPriceList = stock.getPriceHistory();
         assertEquals(stockPriceList, stock.getPriceHistory());
     }
 
     @Test
-    public void getStockSymbolTest() {
+    void getStockSymbolTest() {
         assertEquals("DEF", stock.getSymbol());
     }
 
     @Test
-    public void getStockNameTest() {
+    void getStockNameTest() {
         assertEquals("default", stock.getName());
     }
 
     @Test
-    public void getStockPurchaseDateTest() {
+    void getStockPurchaseDateTest() {
         assertEquals(LocalDate.now(), stock.getPurchaseDate());
     }
 
     @Test
-    public void getStockPurchasePriceTest() {
+    void getStockPurchasePriceTest() {
         assertEquals(0, stock.getPurchasePrice());
     }
 
     @Test
-    public void getStockAmountTest() {
+    void getStockAmountTest() {
         assertEquals(0, stock.getAmount());
     }
 
+    private void setSymbolOnce(String weet) {
+        stock.setSymbol(weet);
+        assertEquals(weet, stock.getSymbol());
+    }
 
     private void SetAmountOnce(int i) {
         stock.setAmount(i);

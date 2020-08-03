@@ -10,19 +10,19 @@ public class StockPriceListTest {
     StockPriceList priceList;
 
     @BeforeEach
-    public void setup() {
+    void setup() {
         priceList = new StockPriceList();
     }
 
     @Test
-    public void addOneNewPriceTest() {
+    void addOneNewPriceTest() {
         StockPrice firstStockPrice = new StockPrice();
 
         addNewStockPrice(firstStockPrice, 1);
     }
 
     @Test
-    public void checkLastAddTest() {
+    void checkLastAddTest() {
         StockPrice first = new StockPrice();
 
         priceList.add(first);
@@ -30,7 +30,7 @@ public class StockPriceListTest {
     }
 
     @Test
-    public void checkTwoAddedLastTest() {
+    void checkTwoAddedLastTest() {
         StockPrice first = new StockPrice();
         StockPrice second = new StockPrice();
 
@@ -41,7 +41,7 @@ public class StockPriceListTest {
     }
 
     @Test
-    public void checkManyAddedLastTest() {
+    void checkManyAddedLastTest() {
         StockPrice first = new StockPrice();
         StockPrice second = new StockPrice();
         StockPrice third = new StockPrice();
@@ -59,7 +59,7 @@ public class StockPriceListTest {
     }
 
     @Test
-    public void addThreeNewPriceTest() {
+    void addThreeNewPriceTest() {
         StockPrice firstStockPrice = new StockPrice();
         StockPrice secondStockPrice = new StockPrice();
         StockPrice thirdStockPrice = new StockPrice();
@@ -70,12 +70,12 @@ public class StockPriceListTest {
     }
 
     @Test
-    public void checkZeroLengthTest() {
+    void checkZeroLengthTest() {
         assertEquals(0, priceList.length());
     }
 
     @Test
-    public void checkOneLengthTest() {
+    void checkOneLengthTest() {
         StockPrice firstStockPrice = new StockPrice();
 
         priceList.add(firstStockPrice);
@@ -83,7 +83,7 @@ public class StockPriceListTest {
     }
 
     @Test
-    public void checkFourLengthTest() {
+    void checkFourLengthTest() {
         StockPrice firstStockPrice = new StockPrice();
         StockPrice secondStockPrice = new StockPrice();
         StockPrice thirdStockPrice = new StockPrice();
@@ -97,14 +97,14 @@ public class StockPriceListTest {
     }
 
     @Test
-    public void checkEmptyContainsTest() {
+    void checkEmptyContainsTest() {
         StockPrice testStockPrice = new StockPrice();
 
         assertFalse(priceList.contains(testStockPrice));
     }
 
     @Test
-    public void checkContainsFalseTest() {
+    void checkContainsFalseTest() {
         StockPrice testStockPrice = new StockPrice();
         StockPrice falsePrice = new StockPrice();
 
@@ -113,7 +113,7 @@ public class StockPriceListTest {
     }
 
     @Test
-    public void checkContainsTest() {
+    void checkContainsTest() {
         StockPrice firstStockPrice = new StockPrice();
 
         priceList.add(firstStockPrice);
@@ -121,7 +121,7 @@ public class StockPriceListTest {
     }
 
     @Test
-    public void checkFiveContainsTest() {
+    void checkFiveContainsTest() {
         StockPrice firstStockPrice = new StockPrice();
         StockPrice secondStockPrice = new StockPrice();
         StockPrice thirdStockPrice = new StockPrice();
@@ -144,7 +144,7 @@ public class StockPriceListTest {
     }
 
     @Test
-    public void checkLengthForOneTest() {
+    void checkLengthForOneTest() {
         StockPrice price = new StockPrice();
 
         priceList.add(price);
@@ -152,7 +152,7 @@ public class StockPriceListTest {
     }
 
     @Test
-    public void checkLengthForTwoTest() {
+    void checkLengthForTwoTest() {
         StockPrice price1 = new StockPrice();
         StockPrice price2 = new StockPrice();
 

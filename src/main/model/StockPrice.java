@@ -1,10 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 // Represents the date at which the given stock was at this price.
-public class StockPrice {
+public class StockPrice implements Serializable {
 
     private double price;
     private LocalDate date;
@@ -38,4 +39,5 @@ public class StockPrice {
     public LocalDate getDate() {
         return this.date;
     }
+
 }

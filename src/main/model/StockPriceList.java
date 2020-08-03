@@ -1,9 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 // Represents a list of Stock Prices
-public class StockPriceList {
+public class StockPriceList implements Serializable {
 
     LinkedList<StockPrice> priceList;
 
@@ -37,5 +38,4 @@ public class StockPriceList {
         }
         return false;
     }
-
 }
