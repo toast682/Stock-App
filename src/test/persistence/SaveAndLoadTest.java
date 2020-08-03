@@ -29,12 +29,6 @@ public class SaveAndLoadTest {
     }
 
     @Test
-    void constructorTest() {
-        data = new SaveAndLoad();
-        assertNotNull(data);
-    }
-
-    @Test
     void saveAndLoadOnceTest() {
         try {
             data.saveData(stockList);
