@@ -13,9 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
 // Test class for the SaveAndLoad Class
 public class SaveAndLoadTest {
 
-
-    private static final String SAVE_FILE_NAME = "./data/stockportfolio.ser";
-
     SaveAndLoad data;
     StockList stockList;
     StockList testList;
@@ -30,7 +27,13 @@ public class SaveAndLoadTest {
         google.setSymbol("GOOG");
         stockList.buyStock(google);
     }
-    
+
+    @Test
+    void constructorTest() {
+        data = new SaveAndLoad();
+        assertNotNull(data);
+    }
+
     @Test
     void saveAndLoadOnceTest() {
         try {
