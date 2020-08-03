@@ -30,8 +30,7 @@ public class SaveAndLoadTest {
         google.setSymbol("GOOG");
         stockList.buyStock(google);
     }
-
-
+    
     @Test
     void saveAndLoadOnceTest() {
         try {
