@@ -253,10 +253,10 @@ public class StockListTest {
 
     @Test
     void exceptionTest() {
-        try{
-            stockList.findStock("HH", 212 );
+        try {
+            stockList.findStock("HH", 212);
             fail("Should not have happened");
-        } catch (MassiveStockFindError e){
+        } catch (MassiveStockFindError e) {
 
         }
     }
@@ -283,5 +283,38 @@ public class StockListTest {
     @Test
     void sellStockWhenNoStockExistsTest() {
         stockList.sellStock("HH", 200);
+    }
+
+    @Test
+    void findStockWithSymbolButNotAmount() {
+        try {
+            stockList.buyStock(new Stock());
+            stockList.findStock("DEF", 12);
+            fail("Should not have worked");
+        } catch (MassiveStockFindError e) {
+
+        }
+    }
+
+    @Test
+    void findStockWithoutSymbolButAmount() {
+        try {
+            stockList.buyStock(new Stock());
+            stockList.findStock("GOOG", 0);
+            fail("Should not have worked");
+        } catch (MassiveStockFindError e) {
+
+        }
+    }
+
+    @Test
+    void findStockWithoutSymbolAndWithoutAmount() {
+        try {
+            stockList.buyStock(new Stock());
+            stockList.findStock("GOOG", 45);
+            fail("Should not have worked");
+        } catch (MassiveStockFindError e) {
+
+        }
     }
 }
