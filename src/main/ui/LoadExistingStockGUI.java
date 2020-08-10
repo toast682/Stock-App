@@ -24,13 +24,13 @@ public class LoadExistingStockGUI extends JFrame implements ActionListener {
     private SaveAndLoad data;
 
     public LoadExistingStockGUI() {
-        initializeJFrame();
         initializeJPanel();
+        initializeJFrame();
 
     }
 
     private void initializeJFrame() {
-        setSize(WIDTH, HEIGHT);
+        setMinimumSize(getPreferredSize());
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(TITLE);

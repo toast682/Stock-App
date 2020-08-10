@@ -32,11 +32,11 @@ public class AddStock extends JFrame implements ActionListener {
     public AddStock(StockList stocks) {
         stockPortfolio = stocks;
         initializeJPanel();
-        initializeField();
+        initializeFrame();
     }
 
 
-    private void initializeField() {
+    private void initializeFrame() {
         stock = new Stock();
         setMinimumSize(getPreferredSize());
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,6 +62,43 @@ public class AddStock extends JFrame implements ActionListener {
         add(panel);
 
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if ("Submit".equals(e.getActionCommand())) {
+            if (ensureAllFieldsFilled()) {
+                try {
+                    makeNewStock();
+                    stockPortfolio.buyStock(stock);
+                    setVisible(false);
+                    dispose();
+                } catch (IncorrectTypeException e1) {
+                    JOptionPane.showMessageDialog(null,
+                            "Please correct the error and try again!");
+                }
+
+            }
+
+        } else if ("Back".equals(e.getActionCommand())) {
+            goBack();
+        }
+
+    }
+
+    private void makeNewStock() throws IncorrectTypeException {
+        stock.setName(name.getText());
+        stock.setSymbol(symbol.getText());
+        setAmount();
+        setPurchaseDate();
+        setPurchasePrice();
+        addNewPurchaseHistory();
+    }
+
+    private void goBack() {
+        setVisible(false);
+        dispose();
+    }
+
 
     private void addButtons() {
         submit = new JButton("Submit");
@@ -117,26 +154,6 @@ public class AddStock extends JFrame implements ActionListener {
         panel.add(purchasePrice);
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if ("Submit".equals(e.getActionCommand())) {
-            if (ensureAllFieldsFilled()) {
-                try {
-                    makeNewStock();
-                    setVisible(false);
-                    dispose();
-                } catch (IncorrectTypeException e1) {
-                    JOptionPane.showMessageDialog(null,
-                            "Please correct the error and try again!");
-                }
-
-            }
-
-        } else if ("Back".equals(e.getActionCommand())) {
-            System.out.println("ldgjd");
-        }
-
-    }
 
     private boolean ensureAllFieldsFilled() {
         if (name.getText().trim().length() == 0) {
@@ -159,14 +176,6 @@ public class AddStock extends JFrame implements ActionListener {
         }
     }
 
-    private void makeNewStock() throws IncorrectTypeException {
-        stock.setName(name.getText());
-        stock.setSymbol(symbol.getText());
-        setAmount();
-        setPurchaseDate();
-        setPurchasePrice();
-        addNewPurchaseHistory();
-    }
 
     private void addNewPurchaseHistory() {
         String date = purchaseDate.getText();
@@ -175,9 +184,6 @@ public class AddStock extends JFrame implements ActionListener {
         stock.addNewPriceHistory(date, price);
     }
 
-    private void goBack() {
-        stock = null;
-    }
 
     private void setAmount() throws IncorrectTypeException {
         try {

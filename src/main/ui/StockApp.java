@@ -200,19 +200,6 @@ public class StockApp {
     //MODIFIES: Stock, StockList
     //EFFECTS: Adds a new stock to the stock list with given user input
     private void buyStock() {
-//        Stock newStock = new Stock();
-//        double purchasePrice;
-//        String purchaseDate;
-//
-//        System.out.println("You have selected that you want to add a stock \n");
-//        setStockSymbol(newStock);
-//        setStockName(newStock);
-//        setStockAmount(newStock);
-//        purchasePrice = setStockPurchasePrice(newStock);
-//        purchaseDate = setStockPurchaseDate(newStock);
-//        addNewPriceHistory(newStock, purchasePrice, purchaseDate);
-//        stockPortfolio.buyStock(newStock);
-
         new AddStock(stockPortfolio);
     }
 
@@ -224,6 +211,8 @@ public class StockApp {
             Stock stockI = stockPortfolio.getIndex(i);
             stockInfo(stockI);
         }
+
+//        new ShowStocks(stockPortfolio);
     }
 
     //MODIFIES: Stock, StockPriceList, StockPrice
