@@ -55,7 +55,7 @@ public class StockApp {
 
     //MODIFIES: youStocks
     //EFFECTS: If user wants to load in a portfolio, this does it, otherwise, creates a new portfolio
-    private StockList chooseSelection() {
+    protected StockList chooseSelection() {
         while (true) {
             String input = mainInput.next();
             if (input.equals("y")) {
@@ -200,18 +200,20 @@ public class StockApp {
     //MODIFIES: Stock, StockList
     //EFFECTS: Adds a new stock to the stock list with given user input
     private void buyStock() {
-        Stock newStock = new Stock();
-        double purchasePrice;
-        String purchaseDate;
+//        Stock newStock = new Stock();
+//        double purchasePrice;
+//        String purchaseDate;
+//
+//        System.out.println("You have selected that you want to add a stock \n");
+//        setStockSymbol(newStock);
+//        setStockName(newStock);
+//        setStockAmount(newStock);
+//        purchasePrice = setStockPurchasePrice(newStock);
+//        purchaseDate = setStockPurchaseDate(newStock);
+//        addNewPriceHistory(newStock, purchasePrice, purchaseDate);
+//        stockPortfolio.buyStock(newStock);
 
-        System.out.println("You have selected that you want to add a stock \n");
-        setStockSymbol(newStock);
-        setStockName(newStock);
-        setStockAmount(newStock);
-        purchasePrice = setStockPurchasePrice(newStock);
-        purchaseDate = setStockPurchaseDate(newStock);
-        addNewPriceHistory(newStock, purchasePrice, purchaseDate);
-        stockPortfolio.buyStock(newStock);
+        new AddStock(stockPortfolio);
     }
 
     //EFFECTS: Shows all the stocks in the stock list
@@ -222,7 +224,6 @@ public class StockApp {
             Stock stockI = stockPortfolio.getIndex(i);
             stockInfo(stockI);
         }
-
     }
 
     //MODIFIES: Stock, StockPriceList, StockPrice

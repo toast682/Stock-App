@@ -32,7 +32,6 @@ public class SaveAndLoad {
         stockList = (StockList) input.readObject();
         input.close();
         inputFile.close();
-        System.out.println(stockList.length());
         return stockList;
     }
 }
