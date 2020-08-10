@@ -51,28 +51,4 @@ public class StockPriceList implements Serializable {
         }
         return false;
     }
-
-    public StockPrice getMaxPrice() {
-        double minPrice = 0;
-        StockPrice minStockPrice = new StockPrice();
-        for (StockPrice price : priceList) {
-            if (price.getPrice() > minPrice) {
-                minPrice = price.getPrice();
-                minStockPrice = price;
-            }
-        }
-        return minStockPrice;
-    }
-
-    public StockPrice getMinPrice() {
-        double minPrice = this.getStockPrice().getPrice();
-        StockPrice minStockPrice = new StockPrice();
-        for (StockPrice price : priceList) {
-            if (price.getPrice() < minPrice) {
-                minPrice = price.getPrice();
-                minStockPrice = price;
-            }
-        }
-        return minStockPrice;
-    }
 }

@@ -29,6 +29,11 @@ public class SaveAndLoadTest {
     }
 
     @Test
+    void constructorTest() {
+    SaveAndLoad loader = new SaveAndLoad();
+    }
+
+    @Test
     void saveAndLoadOnceTest() {
         try {
             data.saveData(stockList);

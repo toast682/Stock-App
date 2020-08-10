@@ -3,10 +3,12 @@ package ui;
 import model.StockList;
 import persistence.SaveAndLoad;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class LoadStocks extends JFrame implements ActionListener {
@@ -29,9 +31,12 @@ public class LoadStocks extends JFrame implements ActionListener {
 
     private void initializeJPanel() {
         panel = new JPanel();
-        layout = new GridLayout(2, 3, 20, 20);
+        layout = new GridLayout(3, 3, 20, 20);
         panel.setLayout(layout);
         panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+        addBlank();
+//        addLogo();
+
         addBlank();
         addMainLabel();
         addBlank();
@@ -40,6 +45,11 @@ public class LoadStocks extends JFrame implements ActionListener {
         addDoNotLoad();
         add(panel);
     }
+
+//    private void addLogo() {
+//        JPanel panel = new JPanel();
+//
+//    }
 
     private void addDoNotLoad() {
         doNotLoad = new JButton("Do Not Load");
