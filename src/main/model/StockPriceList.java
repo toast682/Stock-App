@@ -1,12 +1,14 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Comparator;
 import java.util.LinkedList;
 
 // Represents a list of Stock Prices
 public class StockPriceList implements Serializable {
 
-    LinkedList<StockPrice> priceList;
+    public LinkedList<StockPrice> priceList;
 
     public StockPriceList() {
         priceList = new LinkedList<>();
@@ -16,6 +18,16 @@ public class StockPriceList implements Serializable {
     //EFFECTS: adds a new Stock Price
     public void add(StockPrice price) {
         priceList.add(price);
+        sort();
+    }
+
+    public void sort() {
+        priceList.sort(new Comparator<StockPrice>() {
+            @Override
+            public int compare(StockPrice o1, StockPrice o2) {
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        });
     }
 
     //REQUIRES: Price List not be empty
@@ -23,6 +35,7 @@ public class StockPriceList implements Serializable {
     public StockPrice getStockPrice() {
         return priceList.getLast();
     }
+
 
     //EFFECTS: Returns the length Stock Price List
     public int length() {
@@ -37,5 +50,29 @@ public class StockPriceList implements Serializable {
             }
         }
         return false;
+    }
+
+    public StockPrice getMaxPrice() {
+        double minPrice = 0;
+        StockPrice minStockPrice = new StockPrice();
+        for (StockPrice price : priceList) {
+            if (price.getPrice() > minPrice) {
+                minPrice = price.getPrice();
+                minStockPrice = price;
+            }
+        }
+        return minStockPrice;
+    }
+
+    public StockPrice getMinPrice() {
+        double minPrice = this.getStockPrice().getPrice();
+        StockPrice minStockPrice = new StockPrice();
+        for (StockPrice price : priceList) {
+            if (price.getPrice() < minPrice) {
+                minPrice = price.getPrice();
+                minStockPrice = price;
+            }
+        }
+        return minStockPrice;
     }
 }

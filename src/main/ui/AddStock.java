@@ -1,13 +1,19 @@
 package ui;
 
+
 import exceptions.IncorrectTypeException;
 import model.Stock;
 import model.StockList;
 
+import javax.print.attribute.standard.Media;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.*;
 import java.time.format.DateTimeParseException;
 
 public class AddStock extends JFrame implements ActionListener {
@@ -39,7 +45,7 @@ public class AddStock extends JFrame implements ActionListener {
     private void initializeFrame() {
         stock = new Stock();
         setMinimumSize(getPreferredSize());
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle(TITLE);
         setVisible(true);
 
@@ -70,6 +76,7 @@ public class AddStock extends JFrame implements ActionListener {
                 try {
                     makeNewStock();
                     stockPortfolio.buyStock(stock);
+                    playCashSound();
                     setVisible(false);
                     dispose();
                 } catch (IncorrectTypeException e1) {
@@ -83,6 +90,21 @@ public class AddStock extends JFrame implements ActionListener {
             goBack();
         }
 
+    }
+
+    private void playCashSound() {
+        try {
+            String soundFileLink = "./data/cashSound.wav";
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(
+                    new File(soundFileLink).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+
+        } catch (Exception e0) {
+            JOptionPane.showMessageDialog(null, "Error!");
+            e0.printStackTrace();
+        }
     }
 
     private void makeNewStock() throws IncorrectTypeException {

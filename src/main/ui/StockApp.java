@@ -8,7 +8,6 @@ import model.StockList;
 import persistence.SaveAndLoad;
 
 import java.io.IOException;
-import java.time.format.DateTimeParseException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -90,7 +89,7 @@ public class StockApp {
                 findAStock();
                 break;
             case 4:
-                showAllStock("You have selected that you want to look at you existing stocks");
+                showAllStock();
                 break;
             case 5:
                 changeCurrentStockPrice();
@@ -204,15 +203,8 @@ public class StockApp {
     }
 
     //EFFECTS: Shows all the stocks in the stock list
-    private void showAllStock(String s) {
-        System.out.println(s);
-        System.out.println("These are the stocks you currently have: \n");
-        for (int i = 0; i <= stockPortfolio.length() - 1; i++) {
-            Stock stockI = stockPortfolio.getIndex(i);
-            stockInfo(stockI);
-        }
-
-//        new ShowStocks(stockPortfolio);
+    private void showAllStock() {
+        new ShowStocks(stockPortfolio);
     }
 
     //MODIFIES: Stock, StockPriceList, StockPrice
@@ -234,7 +226,7 @@ public class StockApp {
         double price;
         String date;
         try {
-            showAllStock("These are the current Stocks that you have");
+            showAllStock();
             System.out.println("Please input the symbol of which stock you want to change the price of:");
             symbol = mainInput.next().toUpperCase().trim();
             System.out.println("Please enter the amount of stocks which you own of the stock which you are changing "
@@ -286,82 +278,6 @@ public class StockApp {
         System.out.println("The purchase price has been set up to be the current price. If you would like to update "
                 + "the price of the stock later on, you can through the main menu!");
         newStock.addNewPriceHistory(purchaseDate, purchasePrice);
-    }
-
-    //MODIFIES: Stock, StockPriceList, StockPrice
-    //EFFECTS: Changes a Stocks purchase date and returns the new purchase date
-    private String setStockPurchaseDate(Stock newStock) {
-        String purchaseDate;
-
-        try {
-            System.out.println("When did you buy the stock? Please enter the date in the format yyyy-MM-dd with the "
-                    + "dashes");
-
-            purchaseDate = mainInput.next();
-            newStock.setPurchaseDate(purchaseDate);
-        } catch (DateTimeParseException e) {
-            System.out.println("Please input date in the valid format yyyy-MM-dd!!");
-            mainInput.nextLine();
-            purchaseDate = mainInput.next();
-
-            newStock.setPurchaseDate(purchaseDate);
-        }
-        return purchaseDate;
-    }
-
-    //MODIFIES: Stock, StockPriceList, StockPrice
-    //EFFECTS: Changes a Stocks purchase price and returns the new purchase price
-    private double setStockPurchasePrice(Stock newStock) {
-        double purchasePrice;
-
-        try {
-            System.out.println("What was the purchase price for the stock?");
-            purchasePrice = mainInput.nextDouble();
-            mainInput.nextLine();
-        } catch (InputMismatchException e) {
-            System.out.println("Please enter a valid real number!");
-            mainInput.nextLine();
-            purchasePrice = mainInput.nextDouble();
-        }
-        newStock.setPurchasePrice(purchasePrice);
-        return purchasePrice;
-    }
-
-    //MODIFIES: Stock
-    //EFFECTS: Changes the amount of stocks
-    private void setStockAmount(Stock newStock) {
-        int amount;
-
-        try {
-            System.out.println("How many stocks did you buy?");
-            amount = mainInput.nextInt();
-            mainInput.nextLine();
-        } catch (InputMismatchException e) {
-            mainInput.nextLine();
-            System.out.println("Please Input a valid Integer!");
-            amount = mainInput.nextInt();
-        }
-        newStock.setAmount(amount);
-    }
-
-    //MODIFIES: Stock
-    //EFFECTS: Changes the name of the stock
-    private void setStockName(Stock newStock) {
-        String name;
-
-        System.out.println("What is the name of the stock?");
-        name = mainInput.next();
-        newStock.setName(name);
-    }
-
-    //MODIFIES: Stock
-    //EFFECTS: Changes the symbol of the stock
-    private void setStockSymbol(Stock newStock) {
-        String symbol;
-        System.out.println("I will just need some information about the stock to get started!");
-        System.out.println("What is the ticker symbol (stock symbol) for the stock you want to add?");
-        symbol = mainInput.next();
-        newStock.setSymbol(symbol);
     }
 
     //EFFECTS: Shows all the possible inputs available for the user when program first starts

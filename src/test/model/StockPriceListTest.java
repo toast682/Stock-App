@@ -162,6 +162,20 @@ public class StockPriceListTest {
         assertEquals(2, priceList.length());
     }
 
+    @Test
+    void checkSortFunction() {
+        StockPrice price1 = new StockPrice();
+        StockPrice price2 = new StockPrice();
+
+        price2.setDate("5000-02-01");
+        priceList.add(price1);
+        priceList.add(price2);
+        priceList.sort();
+
+        assertEquals(price2, priceList.priceList.getLast());
+        assertEquals(price1, priceList.priceList.getFirst());
+    }
+
     private void addNewStockPrice(StockPrice stockPrice, int length) {
         priceList.add(stockPrice);
         assertEquals(length, priceList.length());
