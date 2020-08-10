@@ -17,6 +17,7 @@ public class StockApp {
     private Scanner mainInput;
     private StockList stockPortfolio;
     private SaveAndLoad data;
+    private LoadStocks load;
 
     //EFFECTS: Constructor calls other method and starts ui
     public StockApp() {
@@ -26,11 +27,7 @@ public class StockApp {
     //MODIFIES: this, Stock, StockList
     //EFFECTS: Starts the startup sequence for the app, ends when user exits
     public void startStockApp() {
-        mainInput = new Scanner(System.in);
-        stockPortfolio = null;
-
-        startSequence();
-
+        initStockApp();
         while (true) {
             showOptions();
             int input;
@@ -51,6 +48,12 @@ public class StockApp {
             }
         }
     }
+
+    private void initStockApp() {
+        mainInput = new Scanner(System.in);
+        load = new LoadStocks(this);
+    }
+
 
     //MODIFIES: youStocks
     //EFFECTS: If user wants to load in a portfolio, this does it, otherwise, creates a new portfolio
@@ -100,7 +103,7 @@ public class StockApp {
         }
     }
 
-    private void startSequence() {
+    public void startSequence() {
         System.out.println("Hey, welcome to the Stock Traders Delight!");
         System.out.println("Before we get started, would ypu like to load a existing portfolio?");
         System.out.println("Type \"y\" to load an existing portfolio, or \"n\" for to continue with a new portfolio:");
@@ -247,28 +250,7 @@ public class StockApp {
     //MODIFIES: "./data/account/ser"
     //EFFECTS: If user wants to save portfolio then saves portfolio, otherwise does not save portfolio
     private void quitSequence() {
-        String option;
-
-        System.out.println("Before you quit, would you like to save your stock?");
-        System.out.println("Type \"y\" for yes, or \"n\" for no");
-        option = mainInput.next();
-        while (true) {
-            if (option.equals("y")) {
-                System.out.println("Saving your data!");
-                try {
-                    data.saveData(stockPortfolio);
-                    break;
-                } catch (IOException e) {
-                    System.out.println("There was an error saving your data.");
-                    e.printStackTrace();
-                }
-            } else if (option.equals("n")) {
-                System.out.println("Did not save data");
-                break;
-            } else {
-                System.out.println("Invalid selection");
-            }
-        }
+        new SaveStock(this.stockPortfolio);
     }
 
 
@@ -291,5 +273,9 @@ public class StockApp {
 //      System.out.println("6. Save your stock portfolio");
         System.out.println("6. Exit the app");
         System.out.println("Please input a number associated with the options above \n");
+    }
+
+    public void setStockPortfolio(StockList stockList) {
+        this.stockPortfolio = stockList;
     }
 }

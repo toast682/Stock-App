@@ -19,22 +19,22 @@ public class LoadExistingStockGUI extends JFrame implements ActionListener {
     private GridBagConstraints gbc = new GridBagConstraints();
     private JButton yes;
     private JButton no;
-    private StockApp stockApp;
-    private StockList stockList;
+    public StockList stockList;
     private SaveAndLoad data;
 
     public LoadExistingStockGUI() {
+        this.stockList = stockList;
         initializeJPanel();
         initializeJFrame();
 
     }
 
     private void initializeJFrame() {
-        setMinimumSize(getPreferredSize());
-        setVisible(true);
+        setSize(new Dimension(650, 500));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(TITLE);
         add(initializeJPanel());
+        setVisible(true);
     }
 
     private JPanel initializeJPanel() {
@@ -52,13 +52,13 @@ public class LoadExistingStockGUI extends JFrame implements ActionListener {
         gbc.gridwidth = 1;
         gbc.gridheight = 3;
         gbc.fill = GridBagConstraints.BOTH;
-        setGbcXYPosition(0, 1);
+        setGbcXYPosition(0, 2);
         panel.add(yes, gbc);
         yes.setActionCommand("Yes");
 
 
         no = initializeJButton("No");
-        setGbcXYPosition(3, 1);
+        setGbcXYPosition(3, 2);
         gbc.gridwidth = 1;
         panel.add(no, gbc);
         no.addActionListener(this);
