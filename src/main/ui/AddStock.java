@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.io.*;
 import java.time.format.DateTimeParseException;
 
+//GUI representing the buy interaction with the user
 public class AddStock extends JFrame implements ActionListener {
 
     private static final String TITLE = "Adding A Stock";
@@ -36,6 +37,7 @@ public class AddStock extends JFrame implements ActionListener {
     private GridLayout layout;
 
 
+    //EFFECTS: Creats new AddStock Gui to buy stock
     public AddStock(StockList stocks) {
         stockPortfolio = stocks;
         initializeJPanel();
@@ -43,6 +45,8 @@ public class AddStock extends JFrame implements ActionListener {
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: Creates a frame for the user information to be inside
     private void initializeFrame() {
         stock = new Stock();
         setMinimumSize(getPreferredSize());
@@ -52,6 +56,8 @@ public class AddStock extends JFrame implements ActionListener {
 
     }
 
+    //MODIFIES: This
+    //EFFECTS: creates all user interaction stuff and places it where it needs to be
     private void initializeJPanel() {
         panel = new JPanel();
         layout = new GridLayout(8, 2, 20, 20);
@@ -70,6 +76,7 @@ public class AddStock extends JFrame implements ActionListener {
 
     }
 
+    //EFFECTS: performs tasks associated with the two buttons
     @Override
     public void actionPerformed(ActionEvent e) {
         if ("Submit".equals(e.getActionCommand())) {
@@ -93,6 +100,7 @@ public class AddStock extends JFrame implements ActionListener {
 
     }
 
+    //EFFECTS: Plays cash sound whenever you buy a stock
     private void playCashSound() {
         try {
             String soundFileLink = "./data/cashSound.wav";
@@ -108,6 +116,8 @@ public class AddStock extends JFrame implements ActionListener {
         }
     }
 
+    //MODIFIES: this
+    //EFFECTS: Creates a new stock ang gets all user information from forms
     private void makeNewStock() throws IncorrectTypeException {
         stock.setName(name.getText());
         stock.setSymbol(symbol.getText());
@@ -117,12 +127,16 @@ public class AddStock extends JFrame implements ActionListener {
         addNewPurchaseHistory();
     }
 
+    //MODIFIES: this
+    //EFFECTS: Exits gui and goes back to the commandline menu
     private void goBack() {
         setVisible(false);
         dispose();
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: adds buttons to panel
     private void addButtons() {
         submit = new JButton("Submit");
         submit.setActionCommand("Submit");
@@ -134,6 +148,8 @@ public class AddStock extends JFrame implements ActionListener {
         panel.add(back);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds main label to panel
     private void addMainLabel() {
         JLabel label = new JLabel("Please enter the following information:");
         label.setFont(new Font("Serif", Font.BOLD, 18));
@@ -142,6 +158,8 @@ public class AddStock extends JFrame implements ActionListener {
     }
 
 
+    //MODIFIES: this
+    //EFFECTS: adds name label and input field to panel
     private void nameField() {
         JLabel nameLabel = new JLabel("Please enter the name of the stock:");
         panel.add(nameLabel);
@@ -149,6 +167,8 @@ public class AddStock extends JFrame implements ActionListener {
         panel.add(name);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds symbol label and input field to panel
     private void symbolField() {
         JLabel symbolLabel = new JLabel("Please enter the Ticker Symbol of the stock:");
         panel.add(symbolLabel);
@@ -156,6 +176,8 @@ public class AddStock extends JFrame implements ActionListener {
         panel.add(symbol);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds amount label and input field to panel
     private void amountField() {
         JLabel amountLabel = new JLabel("Please enter the amount of stocks that you purchased:");
         panel.add(amountLabel);
@@ -163,6 +185,8 @@ public class AddStock extends JFrame implements ActionListener {
         panel.add(amount);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds purchaseDate label and input field to panel
     private void purchaseDateField() {
         JLabel purchaseDateLabel = new JLabel("Please enter purchase date in the format \"yyyy-MM-dd\":");
         panel.add(purchaseDateLabel);
@@ -170,6 +194,8 @@ public class AddStock extends JFrame implements ActionListener {
         panel.add(purchaseDate);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds purchasePrice label and input field to panel
     private void purchasePriceField() {
         JLabel purchasePriceLabel = new JLabel("Please enter the price that you purchased the stock for:");
         panel.add(purchasePriceLabel);
@@ -177,7 +203,7 @@ public class AddStock extends JFrame implements ActionListener {
         panel.add(purchasePrice);
     }
 
-
+    //EFFECTS: Ensures all fields are filled before submitting
     private boolean ensureAllFieldsFilled() {
         if (name.getText().trim().length() == 0) {
             JOptionPane.showMessageDialog(null, "Please enter a name");

@@ -3,12 +3,10 @@ package ui;
 import model.StockList;
 import persistence.SaveAndLoad;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public class LoadStocks extends JFrame implements ActionListener {
@@ -35,8 +33,8 @@ public class LoadStocks extends JFrame implements ActionListener {
         panel.setLayout(layout);
         panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         addBlank();
-//        addLogo();
-
+        addLogo();
+        addBlank();
         addBlank();
         addMainLabel();
         addBlank();
@@ -44,12 +42,18 @@ public class LoadStocks extends JFrame implements ActionListener {
         addBlank();
         addDoNotLoad();
         add(panel);
+        validate();
     }
 
-//    private void addLogo() {
-//        JPanel panel = new JPanel();
-//
-//    }
+    private void addLogo() {
+        ImageIcon logoImage = new ImageIcon("./data/logo.jpg");
+        Image modifiedLogo = logoImage.getImage().getScaledInstance(500, 300, Image.SCALE_SMOOTH);
+        ImageIcon newLogo = new ImageIcon(modifiedLogo);
+        JLabel logo = new JLabel(newLogo);
+        panel.add(logo);
+        validate();
+
+    }
 
     private void addDoNotLoad() {
         doNotLoad = new JButton("Do Not Load");
