@@ -56,3 +56,17 @@ wishlist, then I also want the ability to not do so. The choice that the app pro
 As a user, I want the ability to load my stock portfolio that I have made earlier. As an additional feature, I want to 
 be able to choose between previously saved portfolios, such that multiple people can use my app without have multiple 
 instances of the app open. This will allow greater flexibility when it comes to being able to use the app.
+
+
+##Instructions for Grader
+- You can generate the loading event by simply starting the program. A gui should appear asking to load a stock. 
+The GUI has a custom-made logo, and this is one part of my audio visual experience.
+- You can generate the "adding Xs to Ys" event by pressing "1" on the main menu (the "add new stock option"), and a new
+gui should appear asking to fill out some information about the stock you want to add. When you click submit, assuming 
+you have no errors, you shal hear a cash register sound effect. This is the second part of my audio visual effect, and 
+adds to the effect of the GUI.
+- You can locate my visual component on the load gui option, and that is the logo of my application.
+- You can trigger my audio component by simply pressing submit on the "add a new stock" gui. It is the sound of the cash 
+register.
+- You can save the state of my application by simply pressing save when exiting the application gui. 
+- You can reload the state of my application by simply pressing load when opening the application.

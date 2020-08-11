@@ -9,6 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
+//Handles GUI associated with saving stock
 public class SaveStock extends JFrame implements ActionListener {
 
     private JLabel mainLabel;
@@ -19,6 +20,7 @@ public class SaveStock extends JFrame implements ActionListener {
     private SaveAndLoad data;
     private StockList stockList;
 
+    //EFFECTS: Creates gui to handle saving stock
     public SaveStock(StockList stockList) {
         this.stockList = stockList;
         initializeJPanel();
@@ -26,6 +28,8 @@ public class SaveStock extends JFrame implements ActionListener {
 
     }
 
+    //MODIFIES: this
+    //EFFECTS: Creates panel to house all user interaction components
     private void initializeJPanel() {
         panel = new JPanel();
         layout = new GridLayout(2, 3, 20, 20);
@@ -40,6 +44,8 @@ public class SaveStock extends JFrame implements ActionListener {
         add(panel);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds do not save button
     private void addDoNotSave() {
         doNotSave = new JButton("Do not save");
         doNotSave.setActionCommand("NoSave");
@@ -47,6 +53,8 @@ public class SaveStock extends JFrame implements ActionListener {
         panel.add(doNotSave);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds save button
     private void addSave() {
         save = new JButton("Save");
         save.setActionCommand("Save");
@@ -54,16 +62,22 @@ public class SaveStock extends JFrame implements ActionListener {
         panel.add(save);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds main label button
     private void addMainLabel() {
         mainLabel = new JLabel("Would you like to save your portfolio?");
         panel.add(mainLabel);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds blank label
     private void addBlank() {
         JLabel blank = new JLabel();
         panel.add(blank);
     }
 
+    //MODIFIES: this
+    //EFFECTS: Creates frame to hold panel
     private void initializeJFrame() {
         setMinimumSize(new Dimension(getPreferredSize().width + 100, getPreferredSize().height + 100));
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -71,6 +85,8 @@ public class SaveStock extends JFrame implements ActionListener {
         setVisible(true);
     }
 
+    //MODIFIES: this
+    //EFFECTS: handles logic associated with button presses
     @Override
     public void actionPerformed(ActionEvent e) {
         if ("Save".equals(e.getActionCommand())) {

@@ -226,6 +226,8 @@ public class AddStock extends JFrame implements ActionListener {
     }
 
 
+    //MODIFIES: Stock
+    //EFFECTS: states stock purchase history
     private void addNewPurchaseHistory() {
         String date = purchaseDate.getText();
         double price = Double.parseDouble(purchasePrice.getText());
@@ -233,7 +235,8 @@ public class AddStock extends JFrame implements ActionListener {
         stock.addNewPriceHistory(date, price);
     }
 
-
+    //MODIFIES: Stock
+    //EFFECTS: sets stocks amount
     private void setAmount() throws IncorrectTypeException {
         try {
             stock.setAmount(Integer.parseInt(amount.getText()));
@@ -243,6 +246,8 @@ public class AddStock extends JFrame implements ActionListener {
         }
     }
 
+    //MODIFIES: Stock
+    //EFFECTS: sets purchase date amount
     private void setPurchaseDate() throws IncorrectTypeException {
         try {
             stock.setPurchaseDate(purchaseDate.getText());
@@ -253,6 +258,8 @@ public class AddStock extends JFrame implements ActionListener {
         }
     }
 
+    //MODIFIES: Stock
+    //EFFECTS: sets purchase price amount
     private void setPurchasePrice() throws IncorrectTypeException {
         try {
             stock.setPurchasePrice(Double.parseDouble(purchasePrice.getText()));
