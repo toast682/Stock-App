@@ -73,15 +73,14 @@ register.
 
 ##Phase 4
 ###Phase 4: Task 2
-For this phase of my project, I decided to robustness to the "Stock" class in the "model" package. I believed that 
-this would make my project much more desirable due to the simple fact that when you create a new stock, the inputs
-for the stock fields (amount, name, date, purchasePrice) cannot be of a different type than the expected type, 
-otherwise a InputMismatch error will be throws, causing the program to quit. This is quite a big headache fo the end 
-user who presumable does not want to enter the same fields over and over again due to the fact that they made a simple
-typo. Thus, an exception called "IncorrectTypeException" is thrown when a "InputMismatchError"  is thrown. 
-The second exception comes in the form of a "MassiveStockFindError". This error is thrown when the program tries to find 
-a stock within the stock portfolio, but the stock does not exist within the stock portfolio. This makes it so that if 
-the user tries to find a stock, the program will inform them that said stock does not exist.
+I decided to add robustness to my classes through the addition of exception handling within the "Stock" class. The way 
+that this is implemented is through ensuring that the amount field within the stock object is never below 1. If it
+set to an amount below 1, it will throw an exception that I have made called IncorrectTypeException. This will then be 
+caught and dealt with. The IncorrectTypeException is actually thrown mainly when the user enters an incompatible type
+for a field and can be reminded to change the given input. The other robustness exception I have added is the
+MassiveStockFindError, which is thrown when the user tries to find a stock that is not within the stock portfolio. Both
+of the exceptions are checked exceptions, but I had initially created these before this phase to ensure that the user
+has a great experience that does not end the program everytime en error is made.
 ###Phase 4: Task 3
 An area where I improved cohesion and reduced coupling is when the "AddStock" tries to set the fields within the stock
 class to certain fields, I felt that rather than making it so that the program 

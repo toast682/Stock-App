@@ -84,8 +84,8 @@ public class Stock implements Serializable {
     public void setAmount(String amount) throws IncorrectTypeException {
         try {
             int intAmount = Integer.parseInt(amount);
-            if (intAmount < 0) {
-                throw new NumberFormatException();
+            if (intAmount <= 0) {
+                throw new IncorrectTypeException();
             } else {
                 this.amount = intAmount;
             }
