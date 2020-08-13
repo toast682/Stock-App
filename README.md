@@ -58,15 +58,30 @@ be able to choose between previously saved portfolios, such that multiple people
 instances of the app open. This will allow greater flexibility when it comes to being able to use the app.
 
 
-##Instructions for Grader
+##Instructions for Grader Phase 3
 - You can generate the loading event by simply starting the program. A gui should appear asking to load a stock. 
 The GUI has a custom-made logo, and this is one part of my audio visual experience.
 - You can generate the "adding Xs to Ys" event by pressing "1" on the main menu (the "add new stock option"), and a new
 gui should appear asking to fill out some information about the stock you want to add. When you click submit, assuming 
-you have no errors, you shal hear a cash register sound effect. This is the second part of my audio visual effect, and 
+you have no errors, you shall hear a cash register sound effect. This is the second part of my audio visual effect, and 
 adds to the effect of the GUI.
 - You can locate my visual component on the load gui option, and that is the logo of my application.
 - You can trigger my audio component by simply pressing submit on the "add a new stock" gui. It is the sound of the cash 
 register.
 - You can save the state of my application by simply pressing save when exiting the application gui. 
 - You can reload the state of my application by simply pressing load when opening the application.
+
+##Phase 4
+###Phase 4: Task 2
+For this phase of my project, I decided to robustness to the "Stock" class in the "model" package. I believed that 
+this would make my project much more desirable due to the simple fact that when you create a new stock, the inputs
+for the stock fields (amount, name, date, purchasePrice) cannot be of a different type than the expected type, 
+otherwise a InputMismatch error will be throws, causing the program to quit. This is quite a big headache fo the end 
+user who presumable does not want to enter the same fields over and over again due to the fact that they made a simple
+typo. Thus, an exception called "IncorrectTypeException" is thrown when a "InputMismatchError"  is thrown. 
+The second exception comes in the form of a "MassiveStockFindError". This error is thrown when the program tries to find 
+a stock within the stock portfolio, but the stock does not exist within the stock portfolio. This makes it so that if 
+the user tries to find a stock, the program will inform them that said stock does not exist.
+###Phase 4: Task 3
+An area where I improved cohesion and reduced coupling is when the "AddStock" tries to set the fields within the stock
+class to certain fields, I felt that rather than making it so that the program 

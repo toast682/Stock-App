@@ -3,9 +3,13 @@
 
 package model;
 
+import exceptions.IncorrectTypeException;
+
+import javax.swing.*;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 // Represents a stock with a ticker symbol, a purchase price, a name for the company to which the stock belongs to
 // a purchase date in the format yyyy-MM-dd, a price history consisting of StockPriceList, and the amount of stock
@@ -21,7 +25,7 @@ public class Stock implements Serializable {
     private int amount;
 
 
-    //EFFECTS: Make a new Stock with a defaut name that can be changed later
+    //EFFECTS: Make a new Stock with a default name that can be changed later
     public Stock() {
         LocalDate date = LocalDate.now();
 
@@ -58,22 +62,40 @@ public class Stock implements Serializable {
 
     //MODIFIES: this
     //EFFECTS: Updates the purchase price of the stock to the given price
-    public void setPurchasePrice(double purchasePrice) {
-        this.purchasePrice = purchasePrice;
+    public void setPurchasePrice(String purchasePrice) {
+        this.purchasePrice = Double.parseDouble(purchasePrice);
     }
 
     //REQUIRES: Date be in yyyy-MM-dd format
     //MODIFIES: this
     //EFFECTS: Updates the purchase date of the stock to the given date
-    public void setPurchaseDate(String purchaseDate) {
-        DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        this.purchaseDate = LocalDate.parse(purchaseDate, formattedDate);
+    public void setPurchaseDate(String purchaseDate) throws IncorrectTypeException {
+        try {
+            DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            this.purchaseDate = LocalDate.parse(purchaseDate, formattedDate);
+        } catch (DateTimeParseException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid Date in the format "
+                    + "\"yyyy-MM-dd\" for the amount!");
+            throw new IncorrectTypeException();
+        }
+
     }
 
     //MODIFIES: this
     //EFFECTS: Updates the purchase amount of the stock to the given amount
-    public void setAmount(int amount) {
-        this.amount = amount;
+    public void setAmount(String amount) throws IncorrectTypeException {
+        try {
+            int intAmount = Integer.parseInt(amount);
+            if (intAmount < 0) {
+                throw new NumberFormatException();
+            } else {
+                this.amount = intAmount;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid non negative integer for "
+                    + "the amount!");
+            throw new IncorrectTypeException();
+        }
     }
 
     //EFFECTS: Returns stock symbol

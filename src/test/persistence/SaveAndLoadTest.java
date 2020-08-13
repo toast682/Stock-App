@@ -1,5 +1,6 @@
 package persistence;
 
+import exceptions.IncorrectTypeException;
 import exceptions.MassiveStockFindError;
 import model.Stock;
 import model.StockList;
@@ -23,7 +24,11 @@ public class SaveAndLoadTest {
         Stock google = new Stock();
 
         google.addNewPriceHistory("2020-07-31", 20.12);
-        google.setAmount(100);
+        try {
+            google.setAmount("100");
+        } catch (IncorrectTypeException e) {
+            fail("Should not happened");
+        }
         google.setSymbol("GOOG");
         stockList.buyStock(google);
     }
@@ -92,7 +97,11 @@ public class SaveAndLoadTest {
             fail("Should not have occurred");
         }
         amazon = new Stock();
-        amazon.setAmount(121);
+        try {
+            amazon.setAmount("121");
+        } catch (IncorrectTypeException e) {
+            fail("Should not happened");
+        }
         assertEquals(121, amazon.getAmount());
         amazon.setSymbol("AMZN");
         assertEquals("AMZN", amazon.getSymbol());

@@ -25,7 +25,6 @@ public class StockList implements Serializable {
     //EFFECTS: Sells stock if contained within list, otherwise do nothing
     public void sellStock(String symbol, int amount) {
         Stock stock;
-
         try {
             stock = findStock(symbol, amount);
             list.remove(stock);

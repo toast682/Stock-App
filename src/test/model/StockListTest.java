@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.IncorrectTypeException;
 import exceptions.MassiveStockFindError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,7 +30,11 @@ public class StockListTest {
         Stock boom = new Stock();
         Stock doom = new Stock();
         doom.setSymbol("GOG");
-        doom.setAmount(12);
+        try {
+            doom.setAmount("12");
+        } catch (IncorrectTypeException e) {
+            fail("Should not happened");
+        }
 
         stockList.buyStock(boom);
         assertEquals(1, stockList.length());
@@ -44,7 +49,11 @@ public class StockListTest {
         for (int i = 0; i <= 5000; i++) {
             Stock boom = new Stock();
             boom.setSymbol(Integer.toString(i));
-            boom.setAmount(i);
+            try {
+                boom.setAmount(Integer.toString(i));
+            } catch (IncorrectTypeException e) {
+                fail("Should not happened");
+            }
 
             stockList.buyStock(boom);
             assertEquals(i + 1, stockList.length());
@@ -68,7 +77,11 @@ public class StockListTest {
         Stock boom = new Stock();
         Stock doom = new Stock();
         doom.setSymbol("GOG");
-        doom.setAmount(12);
+        try {
+            doom.setAmount("12");
+        } catch (IncorrectTypeException e) {
+            fail("Should not happened");
+        }
 
         stockList.buyStock(boom);
         assertEquals(1, stockList.length());
@@ -88,7 +101,11 @@ public class StockListTest {
     void sellLargeAmountOfStocksTest() {
         for (int i = 0; i <= 5000; i++) {
             Stock boom = new Stock();
-            boom.setAmount(i);
+            try {
+                boom.setAmount(Integer.toString(i));
+            } catch (IncorrectTypeException e) {
+                fail("Should not happened");
+            }
             boom.setSymbol(Integer.toString(i));
 
             stockList.buyStock(boom);
@@ -134,7 +151,11 @@ public class StockListTest {
 
         for (int i = 0; i <= 5000; i++) {
             Stock boom = new Stock();
-            boom.setAmount(i);
+            try {
+                boom.setAmount(Integer.toString(i));
+            } catch (IncorrectTypeException e) {
+                fail("Should not happened");
+            }
             boom.setSymbol(Integer.toString(i));
 
             stockList.buyStock(boom);
@@ -165,7 +186,11 @@ public class StockListTest {
         Stock boom = new Stock();
         Stock look = new Stock();
 
-        look.setAmount(100);
+        try {
+            look.setAmount("100");
+        } catch (IncorrectTypeException e) {
+            fail("Should not happened");
+        }
         look.setSymbol("GERF");
 
         try {
@@ -187,13 +212,29 @@ public class StockListTest {
         Stock gogs = new Stock();
         Stock hoid = new Stock();
 
-        look.setAmount(100);
+        try {
+            look.setAmount("100");
+        } catch (IncorrectTypeException e) {
+            fail("Should not happened");
+        }
         look.setSymbol("GERF");
-        fdg.setAmount(1000);
+        try {
+            fdg.setAmount("1000");
+        } catch (IncorrectTypeException e) {
+            fail("Should not happened");
+        }
         fdg.setSymbol("fgd");
-        gogs.setAmount(100);
+        try {
+            gogs.setAmount("100");
+        } catch (IncorrectTypeException e) {
+            fail("Should not happened");
+        }
         gogs.setSymbol("gogs");
-        hoid.setAmount(100);
+        try {
+            hoid.setAmount("100");
+        } catch (IncorrectTypeException e) {
+            e.printStackTrace();
+        }
         hoid.setSymbol("hoid");
 
         try {

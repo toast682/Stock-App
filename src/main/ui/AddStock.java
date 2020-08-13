@@ -238,31 +238,20 @@ public class AddStock extends JFrame implements ActionListener {
     //MODIFIES: Stock
     //EFFECTS: sets stocks amount
     private void setAmount() throws IncorrectTypeException {
-        try {
-            stock.setAmount(Integer.parseInt(amount.getText()));
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid integer for the amount!");
-            throw new IncorrectTypeException();
-        }
+        stock.setAmount(amount.getText());
     }
 
     //MODIFIES: Stock
     //EFFECTS: sets purchase date amount
     private void setPurchaseDate() throws IncorrectTypeException {
-        try {
-            stock.setPurchaseDate(purchaseDate.getText());
-        } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid Date in the format "
-                    + "\"yyyy-MM-dd\" for the amount!");
-            throw new IncorrectTypeException();
-        }
+        stock.setPurchaseDate(purchaseDate.getText());
     }
 
     //MODIFIES: Stock
     //EFFECTS: sets purchase price amount
     private void setPurchasePrice() throws IncorrectTypeException {
         try {
-            stock.setPurchasePrice(Double.parseDouble(purchasePrice.getText()));
+            stock.setPurchasePrice(purchasePrice.getText());
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "Please enter a valid number for the amount!");
             throw new IncorrectTypeException();

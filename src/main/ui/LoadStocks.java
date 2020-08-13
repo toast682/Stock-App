@@ -18,7 +18,6 @@ public class LoadStocks extends JFrame implements ActionListener {
     private JButton doNotLoad;
     private JPanel panel;
     private GridLayout layout;
-    private SaveAndLoad data;
     private StockList stockList;
     private StockApp app;
 
@@ -101,11 +100,12 @@ public class LoadStocks extends JFrame implements ActionListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: handels logic associated with button presses
+    //EFFECTS: handles logic associated with button presses
     @Override
     public void actionPerformed(ActionEvent e) {
         if ("Load".equals(e.getActionCommand())) {
             try {
+                SaveAndLoad data = new SaveAndLoad();
                 app.setStockPortfolio(data.loadData());
                 this.setVisible(false);
                 this.dispose();

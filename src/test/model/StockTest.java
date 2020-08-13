@@ -1,5 +1,6 @@
 package model;
 
+import exceptions.IncorrectTypeException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -73,15 +74,15 @@ class StockTest {
 
     @Test
     void setPurchasePriceTest() {
-        stock.setPurchasePrice(20);
+        stock.setPurchasePrice("20");
         assertEquals(20, stock.getPurchasePrice());
     }
 
     @Test
     void setPurchasePriceTwiceTest() {
-        stock.setPurchasePrice(20);
+        stock.setPurchasePrice("20");
         assertEquals(20, stock.getPurchasePrice());
-        stock.setPurchasePrice(152);
+        stock.setPurchasePrice("152");
         assertEquals(152, stock.getPurchasePrice());
     }
 
@@ -90,7 +91,11 @@ class StockTest {
         DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = LocalDate.parse("2020-02-01", formattedDate);
 
-        stock.setPurchaseDate("2020-02-01");
+        try {
+            stock.setPurchaseDate("2020-02-01");
+        } catch (IncorrectTypeException e) {
+            fail("Should not have occurred");
+        }
         assertEquals(date, stock.getPurchaseDate());
     }
 
@@ -100,9 +105,17 @@ class StockTest {
         LocalDate firstDate = LocalDate.parse("2020-02-01", formattedDate);
         LocalDate secondDate = LocalDate.parse("2021-02-06", formattedDate);
 
-        stock.setPurchaseDate("2020-02-01");
+        try {
+            stock.setPurchaseDate("2020-02-01");
+        } catch (IncorrectTypeException e) {
+            fail("Should not have occurred");
+        }
         assertEquals(firstDate, stock.getPurchaseDate());
-        stock.setPurchaseDate("2021-02-06");
+        try {
+            stock.setPurchaseDate("2021-02-06");
+        } catch (IncorrectTypeException e) {
+            fail("Should not have occurred");
+        }
         assertEquals(secondDate, stock.getPurchaseDate());
     }
 
@@ -143,7 +156,11 @@ class StockTest {
     }
 
     private void SetAmountOnce(int i) {
-        stock.setAmount(i);
+        try {
+            stock.setAmount(Integer.toString(i));
+        } catch (IncorrectTypeException e) {
+            fail("Should not happened");
+        }
         assertEquals(i, stock.getAmount());
     }
 }
