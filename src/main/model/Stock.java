@@ -74,8 +74,6 @@ public class Stock implements Serializable {
             DateTimeFormatter formattedDate = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             this.purchaseDate = LocalDate.parse(purchaseDate, formattedDate);
         } catch (DateTimeParseException e) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid Date in the format "
-                    + "\"yyyy-MM-dd\" for the amount!");
             throw new IncorrectTypeException();
         }
 
@@ -92,8 +90,6 @@ public class Stock implements Serializable {
                 this.amount = intAmount;
             }
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null, "Please enter a valid non negative integer for "
-                    + "the amount!");
             throw new IncorrectTypeException();
         }
     }

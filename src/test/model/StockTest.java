@@ -150,6 +150,33 @@ class StockTest {
         assertEquals(0, stock.getAmount());
     }
 
+    @Test
+    void setAmountToNegative() {
+        try {
+            stock.setAmount("-1");
+            fail("Should not have happened");
+        } catch (IncorrectTypeException e) {
+        }
+    }
+
+    @Test
+    void setAmountToString() {
+        try {
+            stock.setAmount("sdf");
+            fail("Should not have occurred");
+        } catch (IncorrectTypeException e) {
+        }
+    }
+
+    @Test
+    void setDateToError() {
+        try {
+            stock.setPurchaseDate("20");
+            fail("Should not have occurred");
+        } catch (IncorrectTypeException e) {
+        }
+    }
+
     private void setSymbolOnce(String weet) {
         stock.setSymbol(weet);
         assertEquals(weet, stock.getSymbol());
