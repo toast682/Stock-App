@@ -12,7 +12,6 @@ import java.io.IOException;
 //Handles Gui associated with loading the stocks
 public class LoadStocks extends JFrame implements ActionListener {
 
-
     private JPanel panel;
     private final StockApp app;
 

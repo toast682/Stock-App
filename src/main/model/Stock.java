@@ -17,12 +17,11 @@ public class Stock implements Serializable {
 
     private String symbol;
     private double purchasePrice;
+    private int amount;
     private String name;
     private LocalDate purchaseDate;
 
     private StockPriceList priceHistory;
-    private int amount;
-
 
     //EFFECTS: Make a new Stock with a default name that can be changed later
     public Stock() {

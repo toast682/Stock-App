@@ -24,7 +24,6 @@ public class AddStock extends JFrame implements ActionListener {
     private final StockList stockPortfolio;
     private Stock stock;
 
-
     private JPanel panel;
     private JTextField name;
     private JTextField symbol;
