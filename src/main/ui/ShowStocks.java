@@ -33,11 +33,10 @@ public class ShowStocks extends JFrame implements ActionListener {
         mainPanel = new JPanel();
         GridLayout layout = new GridLayout(stockPortfolio.length() + 2, 1, mainHorizontalGap,
                 mainVerticalGap);
+
         mainPanel.setLayout(layout);
         mainPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-
         initMainLabel();
-
         getAllStocks();
         initCloseButton();
         add(mainPanel);
@@ -48,6 +47,7 @@ public class ShowStocks extends JFrame implements ActionListener {
     private void initMainLabel() {
         JLabel label = new JLabel("These are the stocks you currently have:");
         label.setFont(new Font("Serif", Font.BOLD, labelFontSize));
+
         mainPanel.add(label);
     }
 
@@ -69,96 +69,31 @@ public class ShowStocks extends JFrame implements ActionListener {
             Font labelName = new Font("Serif", Font.BOLD, fontSize);
             Font infoFont = new Font("Serif", Font.PLAIN, fontSize);
 
-            getName(i, panel, labelName, infoFont);
-            getSymbol(i, panel, labelName, infoFont);
-            getAmount(i, panel, labelName, infoFont);
-            getPurchasePrice(i, panel, labelName, infoFont);
-            getPurchaseDate(i, panel, labelName, infoFont);
-            getCurrentPrice(i, panel, labelName, infoFont);
-            getCurrentDate(i, panel, labelName, infoFont);
-
-
+            getAttribute(stockPortfolio.getIndex(i).getName(), panel, labelName, infoFont, "Name:");
+            getAttribute(stockPortfolio.getIndex(i).getSymbol(), panel, labelName, infoFont, "Symbol:");
+            getAttribute(Integer.toString(stockPortfolio.getIndex(i).getAmount()), panel, labelName, infoFont,
+                    "Amount:");
+            getAttribute(Double.toString(stockPortfolio.getIndex(i).getPurchasePrice()), panel, labelName, infoFont,
+                    "Purchase Price:");
+            getAttribute(stockPortfolio.getIndex(i).getPurchaseDate().toString(), panel, labelName, infoFont,
+                    "Purchase Date:");
+            getAttribute(Double.toString(stockPortfolio.getIndex(i).getPriceHistory().getStockPrice().getPrice()),
+                    panel, labelName, infoFont, "Current Date:");
+            getAttribute(stockPortfolio.getIndex(i).getPriceHistory().getStockPrice().getDate().toString(), panel,
+                    labelName, infoFont, "As of date: ");
             mainPanel.add(panel);
         }
     }
 
     //MODIFIES: this
-    //EFFECTS: retrieves stock name
-    private void getName(int i, JPanel panel, Font labelName, Font infoFont) {
-        JLabel name = new JLabel("Name:");
-        name.setFont(labelName);
-        panel.add(name);
-        JLabel stockName = new JLabel(stockPortfolio.getIndex(i).getName());
-        stockName.setFont(infoFont);
-        panel.add(stockName);
-    }
-
-    //MODIFIES: this
-    //EFFECTS: retrieves stock symbol
-    private void getSymbol(int i, JPanel panel, Font labelName, Font infoFont) {
-        JLabel symbol = new JLabel("Symbol:");
-        symbol.setFont(labelName);
-        panel.add(symbol);
-        JLabel stockSymbol = new JLabel(stockPortfolio.getIndex(i).getSymbol());
-        stockSymbol.setFont(infoFont);
-        panel.add(stockSymbol);
-    }
-
-    //MODIFIES: this
-    //EFFECTS: retrieves stock amount
-    private void getAmount(int i, JPanel panel, Font labelName, Font infoFont) {
-        JLabel amount = new JLabel("Amount:");
-        amount.setFont(labelName);
-        panel.add(amount);
-        JLabel stockAmount = new JLabel(Integer.toString(stockPortfolio.getIndex(i).getAmount()));
-        stockAmount.setFont(infoFont);
-        panel.add(stockAmount);
-    }
-
-    //MODIFIES: this
-    //EFFECTS: retrieves stock purchase price
-    private void getPurchasePrice(int i, JPanel panel, Font labelName, Font infoFont) {
-        JLabel purchasePrice = new JLabel("Purchase Price:");
-        purchasePrice.setFont(labelName);
+    //EFFECTS: Method that gets given attribute from stock and adds to the main panel.
+    private void getAttribute(String attribute, JPanel panel, Font labelFont, Font infoFont, String label) {
+        JLabel purchasePrice = new JLabel(label);
+        purchasePrice.setFont(labelFont);
         panel.add(purchasePrice);
-        JLabel stockPurchasePrice = new JLabel(Double.toString(stockPortfolio.getIndex(i).getPurchasePrice()));
+        JLabel stockPurchasePrice = new JLabel(attribute);
         stockPurchasePrice.setFont(infoFont);
         panel.add(stockPurchasePrice);
-    }
-
-    //MODIFIES: this
-    //EFFECTS: retrieves stock purchase date
-    private void getPurchaseDate(int i, JPanel panel, Font labelName, Font infoFont) {
-        JLabel purchaseDate = new JLabel("Purchase Date:");
-        purchaseDate.setFont(labelName);
-        panel.add(purchaseDate);
-        JLabel stockPurchaseDate = new JLabel(stockPortfolio.getIndex(i).getPurchaseDate().toString());
-        stockPurchaseDate.setFont(infoFont);
-        panel.add(stockPurchaseDate);
-    }
-
-    //MODIFIES: this
-    //EFFECTS: retrieves stock current price
-    private void getCurrentPrice(int i, JPanel panel, Font labelName, Font infoFont) {
-        JLabel currentPrice = new JLabel("Current Price:");
-        currentPrice.setFont(labelName);
-        panel.add(currentPrice);
-        JLabel stockCurrentPrice = new JLabel(
-                Double.toString(stockPortfolio.getIndex(i).getPriceHistory().getStockPrice().getPrice()));
-        stockCurrentPrice.setFont(infoFont);
-        panel.add(stockCurrentPrice);
-    }
-
-    //MODIFIES: this
-    //EFFECTS: retrieves stock current date
-    private void getCurrentDate(int i, JPanel panel, Font labelName, Font infoFont) {
-        JLabel currentDate = new JLabel("As of Date:");
-        currentDate.setFont(labelName);
-        panel.add(currentDate);
-        JLabel stockCurrentDate = new JLabel(
-                stockPortfolio.getIndex(i).getPriceHistory().getStockPrice().getDate().toString());
-        stockCurrentDate.setFont(infoFont);
-        panel.add(stockCurrentDate);
     }
 
     //MODIFIES: this

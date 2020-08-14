@@ -15,7 +15,6 @@ public class StockApp {
     private Scanner mainInput;
     private StockList stockPortfolio;
 
-
     //EFFECTS: Constructor calls other method and starts ui
     public StockApp() {
         startStockApp();

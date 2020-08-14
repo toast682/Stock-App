@@ -30,45 +30,29 @@ public class SaveStock extends JFrame implements ActionListener {
         GridLayout layout = new GridLayout(2, 3, 20, 20);
         panel.setLayout(layout);
         panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        addBlank();
-        addMainLabel();
-        addBlank();
-        addSave();
-        addBlank();
-        addDoNotSave();
+        addLabel("");
+        addLabel("Would you like to save your portfolio?");
+        addLabel("");
+        addButton("Save", "Save");
+        addLabel("");
+        addButton("Do not save", "NoSave");
         add(panel);
     }
 
     //MODIFIES: this
-    //EFFECTS: adds do not save button
-    private void addDoNotSave() {
-        JButton doNotSave = new JButton("Do not save");
-        doNotSave.setActionCommand("NoSave");
-        doNotSave.addActionListener(this);
-        panel.add(doNotSave);
-    }
-
-    //MODIFIES: this
-    //EFFECTS: adds save button
-    private void addSave() {
-        JButton save = new JButton("Save");
-        save.setActionCommand("Save");
-        save.addActionListener(this);
-        panel.add(save);
-    }
-
-    //MODIFIES: this
     //EFFECTS: adds main label button
-    private void addMainLabel() {
-        JLabel mainLabel = new JLabel("Would you like to save your portfolio?");
+    private void addLabel(String label) {
+        JLabel mainLabel = new JLabel(label);
         panel.add(mainLabel);
     }
 
     //MODIFIES: this
-    //EFFECTS: adds blank label
-    private void addBlank() {
-        JLabel blank = new JLabel();
-        panel.add(blank);
+    //EFFECTS: adds a new button with the label of the given buttonLabel, and action command to actionCommand
+    private void addButton(String buttonLabel, String actionCommand) {
+        JButton doNotSave = new JButton(buttonLabel);
+        doNotSave.setActionCommand(actionCommand);
+        doNotSave.addActionListener(this);
+        panel.add(doNotSave);
     }
 
     //MODIFIES: this

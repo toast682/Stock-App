@@ -82,12 +82,16 @@ MassiveStockFindError, which is thrown when the user tries to find a stock that 
 of the exceptions are checked exceptions, but I had initially created these before this phase to ensure that the user
 has a great experience that does not end the program everytime en error is made.
 ###Phase 4: Task 3
-An area where I improved cohesion and reduced coupling is when the "AddStock" tries to set the fields within the stock
-class to certain fields, I felt that rather than making it so that the program 
-
-
-The fist thing I did to properly refactor my code is removing any excess fields within the class that do not need to be
-there. I instead created fields within the methods to reduce the scopes of the fields. In addition to this, I also 
-refactored a field that I called "data" of the type SaveAndLoad. However, SaveAndLoad is a class with only static 
-methods, thus I changed the methods to use the SaveAndLoad class directly (going from data.loadData to 
-SaveAndLoad.loadData) and so on. 
+The first thing I did to improve cohesion is add a new method into SaveStock that replaces 7 other methods. Previously 
+I had a separate method to add a label for a stock name, symbol, amount, purchase price, purchase price, current price,
+and current date. However, I abstracted the given methods into one method that takes in the attribute that I want to 
+show, and shows that. This reduces repeated code by a lot, since all the 7 methods were in essence the same. I repeated 
+this for both of teh LoadStock classes and Save stocks, where I had repeated methods to add specific labels, but I 
+abstracted said code to make it so that it takes the string that it wants to show, and shows said string. This is also 
+repeated for the buttons, since they had 2 different methods to add the buttons, but this method takes in a buttons 
+label, and displays said label, and at the same time, sets the action command to the given action command. This again 
+improves cohesion and improves code readability. The third thing I did is that since the SaveAndLoad class is a class
+that is entirely static, I removed fields from classes (LoadStocks and SaveStocks) that reference to the SaveAndLoad 
+class and instead replaced it with static calls. The fourth thing I did is I changed fields within the  LoadStocks,
+ SaveStocks, and ShowStocks classes into private fields only declared within methods since they were only used within 
+ one field.

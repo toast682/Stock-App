@@ -30,18 +30,20 @@ public class LoadStocks extends JFrame implements ActionListener {
         GridLayout layout = new GridLayout(3, 3, 20, 20);
         panel.setLayout(layout);
         panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-        addBlank();
+
+        addLabel("");
         addLogo();
-        addBlank();
-        addBlank();
-        addMainLabel();
-        addBlank();
-        addLoad();
-        addBlank();
-        addDoNotLoad();
+        addLabel("");
+        addLabel("");
+        addLabel("Would you like to load your existing portfolio?");
+        addLabel("");
+        addButton("Load", "Load");
+        addLabel("");
+        addButton("Do Not Load", "NoLoad");
         add(panel);
         validate();
     }
+
 
     //MODIFIES: this
     //EFFECTS: adds logo to gui
@@ -56,36 +58,22 @@ public class LoadStocks extends JFrame implements ActionListener {
     }
 
     //MODIFIES: this
-    //EFFECTS: adds do not load button to gui
-    private void addDoNotLoad() {
-        JButton doNotLoad = new JButton("Do Not Load");
-        doNotLoad.setActionCommand("NoLoad");
+    //EFFECTS: adds new button with given buttonName and sets Action Command to given actionCommand
+    private void addButton(String buttonName, String actionCommand) {
+        JButton doNotLoad = new JButton(buttonName);
+        doNotLoad.setActionCommand(actionCommand);
         doNotLoad.addActionListener(this);
         panel.add(doNotLoad);
     }
 
-    //MODIFIES: this
-    //EFFECTS: adds a load button to panel
-    private void addLoad() {
-        JButton load = new JButton("Load");
-        load.setActionCommand("Load");
-        load.addActionListener(this);
-        panel.add(load);
-    }
 
     //MODIFIES: this
-    //EFFECTS: adds main label to gui
-    private void addMainLabel() {
-        JLabel mainLabel = new JLabel("Would you like to load your existing portfolio?");
+    //EFFECTS: adds label with given string to the panel
+    private void addLabel(String label) {
+        JLabel mainLabel = new JLabel(label);
         panel.add(mainLabel);
     }
 
-    //MODIFIES: this
-    //EFFECTS: adds blank label to gui
-    private void addBlank() {
-        JLabel blank = new JLabel();
-        panel.add(blank);
-    }
 
     //MODIFIES: this
     //EFFECTS: creates frame to house panel
