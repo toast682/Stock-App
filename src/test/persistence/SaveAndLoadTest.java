@@ -33,10 +33,6 @@ public class SaveAndLoadTest {
         stockList.buyStock(google);
     }
 
-    @Test
-    void constructorTest() {
-    SaveAndLoad loader = new SaveAndLoad();
-    }
 
     @Test
     void saveAndLoadOnceTest() {

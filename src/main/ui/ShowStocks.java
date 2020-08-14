@@ -11,15 +11,14 @@ import java.awt.event.ActionListener;
 public class ShowStocks extends JFrame implements ActionListener {
 
     private static final String TITLE = "Look at all previous stocks";
-    private final int fontSize = 12;
-    private final int labelFontSize = 18;
-    private final int mainHorizontalGap = 20;
-    private final int mainVerticalGap = 20;
+    private static final int fontSize = 12;
+    private static final int labelFontSize = 18;
+    private static final int mainHorizontalGap = 20;
+    private static final int mainVerticalGap = 20;
 
-    private StockList stockPortfolio;
+    private final StockList stockPortfolio;
 
     private JPanel mainPanel;
-    private GridLayout layout;
 
     //EFFECTS: Creates new showStock gui
     public ShowStocks(StockList stockList) {
@@ -32,7 +31,8 @@ public class ShowStocks extends JFrame implements ActionListener {
     //EFFECTS: creates new panel to hold components
     private void initializePanel() {
         mainPanel = new JPanel();
-        layout = new GridLayout(stockPortfolio.length() + 2, 1, mainHorizontalGap, mainVerticalGap);
+        GridLayout layout = new GridLayout(stockPortfolio.length() + 2, 1, mainHorizontalGap,
+                mainVerticalGap);
         mainPanel.setLayout(layout);
         mainPanel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
@@ -165,7 +165,7 @@ public class ShowStocks extends JFrame implements ActionListener {
     //EFFECTS: creates close button
     private void initCloseButton() {
         JButton back = new JButton("Back");
-        back.setActionCommand("Close");
+        back.setActionCommand("Back");
         back.addActionListener(this);
         mainPanel.add(back);
     }
@@ -174,7 +174,7 @@ public class ShowStocks extends JFrame implements ActionListener {
     //EFFECTS: handles logic associated with button
     @Override
     public void actionPerformed(ActionEvent e) {
-        if ("Close".equals(e.getActionCommand())) {
+        if ("Back".equals(e.getActionCommand())) {
             setVisible(false);
             dispose();
         }

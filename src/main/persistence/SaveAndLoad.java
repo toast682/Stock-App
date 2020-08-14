@@ -11,7 +11,6 @@ public class SaveAndLoad {
 
     private static final String SAVE_FILE_NAME = "./data/stockportfolio.ser";
 
-
     //MODIFIES: ./data/account.ser
     //EFFECTS: Serializes and saves give stock list and all of its components. Handles exception by killing program.
     public static void saveData(StockList stockList) throws IOException {

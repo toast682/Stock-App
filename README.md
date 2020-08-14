@@ -84,3 +84,10 @@ has a great experience that does not end the program everytime en error is made.
 ###Phase 4: Task 3
 An area where I improved cohesion and reduced coupling is when the "AddStock" tries to set the fields within the stock
 class to certain fields, I felt that rather than making it so that the program 
+
+
+The fist thing I did to properly refactor my code is removing any excess fields within the class that do not need to be
+there. I instead created fields within the methods to reduce the scopes of the fields. In addition to this, I also 
+refactored a field that I called "data" of the type SaveAndLoad. However, SaveAndLoad is a class with only static 
+methods, thus I changed the methods to use the SaveAndLoad class directly (going from data.loadData to 
+SaveAndLoad.loadData) and so on. 

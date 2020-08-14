@@ -12,13 +12,8 @@ import java.io.IOException;
 //Handles GUI associated with saving stock
 public class SaveStock extends JFrame implements ActionListener {
 
-    private JLabel mainLabel;
-    private JButton save;
-    private JButton doNotSave;
     private JPanel panel;
-    private GridLayout layout;
-    private SaveAndLoad data;
-    private StockList stockList;
+    private final StockList stockList;
 
     //EFFECTS: Creates gui to handle saving stock
     public SaveStock(StockList stockList) {
@@ -32,7 +27,7 @@ public class SaveStock extends JFrame implements ActionListener {
     //EFFECTS: Creates panel to house all user interaction components
     private void initializeJPanel() {
         panel = new JPanel();
-        layout = new GridLayout(2, 3, 20, 20);
+        GridLayout layout = new GridLayout(2, 3, 20, 20);
         panel.setLayout(layout);
         panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         addBlank();
@@ -47,7 +42,7 @@ public class SaveStock extends JFrame implements ActionListener {
     //MODIFIES: this
     //EFFECTS: adds do not save button
     private void addDoNotSave() {
-        doNotSave = new JButton("Do not save");
+        JButton doNotSave = new JButton("Do not save");
         doNotSave.setActionCommand("NoSave");
         doNotSave.addActionListener(this);
         panel.add(doNotSave);
@@ -56,7 +51,7 @@ public class SaveStock extends JFrame implements ActionListener {
     //MODIFIES: this
     //EFFECTS: adds save button
     private void addSave() {
-        save = new JButton("Save");
+        JButton save = new JButton("Save");
         save.setActionCommand("Save");
         save.addActionListener(this);
         panel.add(save);
@@ -65,7 +60,7 @@ public class SaveStock extends JFrame implements ActionListener {
     //MODIFIES: this
     //EFFECTS: adds main label button
     private void addMainLabel() {
-        mainLabel = new JLabel("Would you like to save your portfolio?");
+        JLabel mainLabel = new JLabel("Would you like to save your portfolio?");
         panel.add(mainLabel);
     }
 
@@ -91,7 +86,7 @@ public class SaveStock extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if ("Save".equals(e.getActionCommand())) {
             try {
-                data.saveData(stockList);
+                SaveAndLoad.saveData(stockList);
                 this.setVisible(false);
                 this.dispose();
                 System.exit(0);

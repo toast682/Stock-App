@@ -13,13 +13,8 @@ import java.io.IOException;
 public class LoadStocks extends JFrame implements ActionListener {
 
 
-    private JLabel mainLabel;
-    private JButton load;
-    private JButton doNotLoad;
     private JPanel panel;
-    private GridLayout layout;
-    private StockList stockList;
-    private StockApp app;
+    private final StockApp app;
 
     //EFFECTS: creates new gui
     public LoadStocks(StockApp app) {
@@ -32,7 +27,7 @@ public class LoadStocks extends JFrame implements ActionListener {
     //EFFECTS: creates panel for user interface things
     private void initializeJPanel() {
         panel = new JPanel();
-        layout = new GridLayout(3, 3, 20, 20);
+        GridLayout layout = new GridLayout(3, 3, 20, 20);
         panel.setLayout(layout);
         panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
         addBlank();
@@ -63,14 +58,16 @@ public class LoadStocks extends JFrame implements ActionListener {
     //MODIFIES: this
     //EFFECTS: adds do not load button to gui
     private void addDoNotLoad() {
-        doNotLoad = new JButton("Do Not Load");
+        JButton doNotLoad = new JButton("Do Not Load");
         doNotLoad.setActionCommand("NoLoad");
         doNotLoad.addActionListener(this);
         panel.add(doNotLoad);
     }
 
+    //MODIFIES: this
+    //EFFECTS: adds a load button to panel
     private void addLoad() {
-        load = new JButton("Load");
+        JButton load = new JButton("Load");
         load.setActionCommand("Load");
         load.addActionListener(this);
         panel.add(load);
@@ -79,7 +76,7 @@ public class LoadStocks extends JFrame implements ActionListener {
     //MODIFIES: this
     //EFFECTS: adds main label to gui
     private void addMainLabel() {
-        mainLabel = new JLabel("Would you like to load your existing portfolio?");
+        JLabel mainLabel = new JLabel("Would you like to load your existing portfolio?");
         panel.add(mainLabel);
     }
 
@@ -105,8 +102,7 @@ public class LoadStocks extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if ("Load".equals(e.getActionCommand())) {
             try {
-                SaveAndLoad data = new SaveAndLoad();
-                app.setStockPortfolio(data.loadData());
+                app.setStockPortfolio(SaveAndLoad.loadData());
                 this.setVisible(false);
                 this.dispose();
             } catch (ClassNotFoundException | IOException ioException) {
@@ -118,11 +114,6 @@ public class LoadStocks extends JFrame implements ActionListener {
             this.dispose();
         }
 
-    }
-
-    //EFFECTS: Returns stocklist
-    public StockList getStockList() {
-        return this.stockList;
     }
 }
 

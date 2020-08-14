@@ -5,9 +5,7 @@ package ui;
 import exceptions.MassiveStockFindError;
 import model.Stock;
 import model.StockList;
-import persistence.SaveAndLoad;
 
-import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -16,8 +14,7 @@ public class StockApp {
 
     private Scanner mainInput;
     private StockList stockPortfolio;
-    private SaveAndLoad data;
-    private LoadStocks load;
+
 
     //EFFECTS: Constructor calls other method and starts ui
     public StockApp() {
@@ -51,32 +48,9 @@ public class StockApp {
 
     private void initStockApp() {
         mainInput = new Scanner(System.in);
-        load = new LoadStocks(this);
+        new LoadStocks(this);
     }
 
-
-    //MODIFIES: youStocks
-    //EFFECTS: If user wants to load in a portfolio, this does it, otherwise, creates a new portfolio
-    protected StockList chooseSelection() {
-        while (true) {
-            String input = mainInput.next();
-            if (input.equals("y")) {
-                try {
-                    return data.loadData();
-                } catch (IOException e) {
-                    System.out.println("There was an error loading your data");
-                } catch (ClassNotFoundException e) {
-                    System.out.println("Sorry your previous portfolio does not seem to be found. Creating a new "
-                            + "portfolio");
-                    return new StockList();
-                }
-            } else if (input.equals("n")) {
-                return new StockList();
-            } else {
-                System.out.println("invalid input");
-            }
-        }
-    }
 
     //MODIFIES: StockList, Stock, StockPrice, StockPriceList
     //EFFECTS: User selects from a given number of options then option is executed
@@ -101,15 +75,6 @@ public class StockApp {
                 System.out.println("Invalid selection. Please choose one of the given options");
                 break;
         }
-    }
-
-    public void startSequence() {
-        System.out.println("Hey, welcome to the Stock Traders Delight!");
-        System.out.println("Before we get started, would ypu like to load a existing portfolio?");
-        System.out.println("Type \"y\" to load an existing portfolio, or \"n\" for to continue with a new portfolio:");
-        stockPortfolio = chooseSelection();
-        System.out.println("Welcome to the app !");
-        System.out.println("What would you like to do?");
     }
 
 
@@ -269,8 +234,6 @@ public class StockApp {
         System.out.println("3. Find a stock from your portfolio");
         System.out.println("4. Look at all of your existing stocks");
         System.out.println("5. Change a stocks current price");
-//      System.out.println("6. Look at a stock's performance (NOT SUPPORTED AS OF RIGHT NOW)");
-//      System.out.println("6. Save your stock portfolio");
         System.out.println("6. Exit the app");
         System.out.println("Please input a number associated with the options above \n");
     }

@@ -1,4 +1,4 @@
-// Sount bite recieved from https://www.youtube.com/channel/UCi-xN4ZB6e-0JcXzvBEomlw
+// Sound bite received from https://www.youtube.com/channel/UCi-xN4ZB6e-0JcXzvBEomlw
 
 package ui;
 
@@ -15,7 +15,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.*;
-import java.time.format.DateTimeParseException;
 
 //GUI representing the buy interaction with the user
 public class AddStock extends JFrame implements ActionListener {
@@ -32,12 +31,9 @@ public class AddStock extends JFrame implements ActionListener {
     private JTextField amount;
     private JTextField purchaseDate;
     private JTextField purchasePrice;
-    private JButton submit;
-    private JButton back;
-    private GridLayout layout;
 
 
-    //EFFECTS: Creats new AddStock Gui to buy stock
+    //EFFECTS: Creates new AddStock Gui to buy stock
     public AddStock(StockList stocks) {
         stockPortfolio = stocks;
         initializeJPanel();
@@ -60,7 +56,7 @@ public class AddStock extends JFrame implements ActionListener {
     //EFFECTS: creates all user interaction stuff and places it where it needs to be
     private void initializeJPanel() {
         panel = new JPanel();
-        layout = new GridLayout(8, 2, 20, 20);
+        GridLayout layout = new GridLayout(8, 2, 20, 20);
         panel.setLayout(layout);
         panel.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 
@@ -138,11 +134,11 @@ public class AddStock extends JFrame implements ActionListener {
     //MODIFIES: this
     //EFFECTS: adds buttons to panel
     private void addButtons() {
-        submit = new JButton("Submit");
+        JButton submit = new JButton("Submit");
         submit.setActionCommand("Submit");
         submit.addActionListener(this);
         panel.add(submit);
-        back = new JButton("Back");
+        JButton back = new JButton("Back");
         back.setActionCommand("Back");
         back.addActionListener(this);
         panel.add(back);
