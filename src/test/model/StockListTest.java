@@ -46,7 +46,7 @@ public class StockListTest {
 
     @Test
     void buyLargeAmountOfStocksTest() {
-        for (int i = 0; i <= 5000; i++) {
+        for (int i = 1; i <= 5000; i++) {
             Stock boom = new Stock();
             boom.setSymbol(Integer.toString(i));
             try {
@@ -56,7 +56,7 @@ public class StockListTest {
             }
 
             stockList.buyStock(boom);
-            assertEquals(i + 1, stockList.length());
+            assertEquals(i, stockList.length());
         }
     }
 
@@ -99,7 +99,7 @@ public class StockListTest {
 
     @Test
     void sellLargeAmountOfStocksTest() {
-        for (int i = 0; i <= 5000; i++) {
+        for (int i = 1; i <= 5000; i++) {
             Stock boom = new Stock();
             try {
                 boom.setAmount(Integer.toString(i));
@@ -109,7 +109,7 @@ public class StockListTest {
             boom.setSymbol(Integer.toString(i));
 
             stockList.buyStock(boom);
-            assertEquals(i + 1, stockList.length());
+            assertEquals(i, stockList.length());
         }
         for (int i = 0; i <= 5000; i++) {
             stockList.sellStock(Integer.toString(i), i);
@@ -149,7 +149,7 @@ public class StockListTest {
     @Test
     void checkLargeContainsTrueAndFalseTest() {
 
-        for (int i = 0; i <= 5000; i++) {
+        for (int i = 1; i <= 5000; i++) {
             Stock boom = new Stock();
             try {
                 boom.setAmount(Integer.toString(i));
@@ -159,7 +159,7 @@ public class StockListTest {
             boom.setSymbol(Integer.toString(i));
 
             stockList.buyStock(boom);
-            assertEquals(i + 1, stockList.length());
+            assertEquals(i, stockList.length());
             assertTrue(stockList.contains(Integer.toString(i), i));
         }
         for (int i = 0; i <= 5000; i++) {

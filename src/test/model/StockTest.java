@@ -187,6 +187,16 @@ class StockTest {
         }
     }
 
+    @Test
+    void setStockToNegative() {
+        try {
+            stock.setAmount("-1");
+            fail("Should not have occurred");
+        } catch (IncorrectTypeException e) {
+        }
+
+    }
+
     private void setSymbolOnce(String weet) {
         stock.setSymbol(weet);
         assertEquals(weet, stock.getSymbol());
