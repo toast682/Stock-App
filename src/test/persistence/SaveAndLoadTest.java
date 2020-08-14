@@ -14,7 +14,6 @@ import static org.junit.jupiter.api.Assertions.*;
 // Test class for the SaveAndLoad Class
 public class SaveAndLoadTest {
 
-    SaveAndLoad data;
     StockList stockList;
     StockList testList;
 
@@ -33,17 +32,21 @@ public class SaveAndLoadTest {
         stockList.buyStock(google);
     }
 
+    @Test
+    void constructorTest() {
+
+    }
 
     @Test
     void saveAndLoadOnceTest() {
         try {
-            data.saveData(stockList);
+            SaveAndLoad.saveData(stockList);
         } catch (Exception e) {
             fail("Should not have thrown error");
         }
 
         try {
-            testList = data.loadData();
+            testList = SaveAndLoad.loadData();
         } catch (IOException e) {
             fail("Should not have thrown error");
         } catch (ClassNotFoundException e) {
@@ -68,13 +71,13 @@ public class SaveAndLoadTest {
         Stock amazon;
 
         try {
-            data.saveData(stockList);
+            SaveAndLoad.saveData(stockList);
         } catch (Exception e) {
             fail("Should not have thrown error");
         }
 
         try {
-            testList = data.loadData();
+            testList = SaveAndLoad.loadData();
         } catch (IOException e) {
             fail("Should not have thrown error");
         } catch (ClassNotFoundException e) {
@@ -106,13 +109,13 @@ public class SaveAndLoadTest {
         stockList.buyStock(amazon);
 
         try {
-            data.saveData(stockList);
+            SaveAndLoad.saveData(stockList);
         } catch (IOException e) {
             fail("Should not have thrown error");
         }
 
         try {
-            testList = data.loadData();
+            testList = SaveAndLoad.loadData();
         } catch (IOException e) {
             fail("Should not have thrown error");
         } catch (ClassNotFoundException e) {
